@@ -1,0 +1,35 @@
+name: Case Studies
+output_dir: '.'
+navbar:
+  title: Case Studies
+  type: inverse
+  left:
+  - text: Home
+    href: index.html
+  - text: Policies
+    href: policies.html
+  - text: Case Study 1
+    href: cs01.html
+  - text: Case Study 2
+    href: cs02.html
+  - text: Case Study 3
+    href: cs03.html
+  - text: Case Study 4
+    href: cs04.html
+  - text: Case Study 5
+    href: cs05.html
+  - text: Individual Case Study
+    href: cs_indiv.html
+output:
+  html_document:
+    theme: yeti
+    highlight: tango
+    fig_caption: yes
+    toc: yes
+    toc_float:
+      collapsed: no
+      smooth_scroll: yes
+    css: styles.css
+    lib_dir: site_libs
+    self_contained: no
+
