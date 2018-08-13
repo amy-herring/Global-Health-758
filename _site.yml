@@ -8,6 +8,8 @@ navbar:
     href: index.html
   - text: Policies
     href: policies.html
+  - text: R Basics
+    href: Rbasics.html    
   - text: Case Study 1
     href: cs01.html
   - text: Case Study 2
@@ -16,8 +18,6 @@ navbar:
     href: cs03.html
   - text: Case Study 4
     href: cs04.html
-  - text: Case Study 5
-    href: cs05.html
   - text: Individual Case Study
     href: cs_indiv.html
 output:

@@ -1,0 +1,80 @@
+---
+title: "Getting The Data"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# How to Obtain Data Frames From CIA Factbook
+First, you will need to obtain the factbook from https://www.cia.gov/library/publications/download/. Click "factbook.zip" and this will download the entire factbook for you. Then you have two options for obtains your data sets:
+
+## Option 1: Rank Order Txt Files
+Your first option is using the rank order section of the factbook which has txt files for each variable. However, the significant drawnback of this is that it only has one value for each country, i.e. you cannot use it to obtain a variable such as population structure since it has multiple values for each country. 
+
+- Remember to give your columns names.
+- To find the corresponding number for each variable, e.g. 2119 for population, you use the "rankorderguide.html" and click on your desired variable. Then in the address bar at the top of the screen you can see the correct number for it.
+- You may need to delete columns/clean the data to obtain the correct format.
+ 
+```{r rankorder}
+library(readr)
+
+pop_data <- read_table("~/Documents/TEACHING/glhlth758/factbook/rankorder/rawdata_2119.txt", col_names = c("X1", "country","X3", "X4", "pop"))
+pop_data <- pop_data[,-c(1,3,4)] # remove blank columns
+save(pop_data, file="~/Documents/GitHub/case-studies/glhlth/decks/data/pop_data.RData")
+
+IM_data <- read_table("~/Documents/TEACHING/glhlth758/factbook/rankorder/rawdata_2091.txt", col_names = c("X1", "country","X3", "X4", "infMort"))
+IM_data <- IM_data[,-c(1,3,4)]
+save(IM_data, file="~/Documents/GitHub/case-studies/glhlth/decks/data/IM_data.RData")
+```
+## Option 2: Field HTML Files
+Your second option is to use the field html files. These have the advantage of being more complete and more detailed information on each variable. However, they are also in a less user-friendly format.
+
+```{r field}
+library(rvest)
+
+# read in data
+test <- read_html("~/Documents/TEACHING/glhlth758/factbook/fields/print_2010.html")
+t <- test %>% html_table(fill = TRUE) # converts html to a list
+
+# Extracting the desired data
+# First view the data and determine what parts of the data we need
+# I recommend clicking on t in the environment to look at its structure more easily
+# head(t)
+
+# create an empty data frame to hold our data
+population_structure <- matrix(0, 231, 6)
+colnames(population_structure) <- c("country", "ps_0-14", "ps_15-24", "ps_25-54", "ps_55-64", "ps_65+")
+
+# filling the data frame
+for(i in 1:231){
+  # getting country
+  population_structure[i, 1] <- t[[1]][i,1]
+  # splitting based on category
+  levels <- strsplit(t[[1]][i,2], ")")
+  for(j in 1:5){
+    # obtaining the relevant sections of the data
+    start <- regexpr(":",levels[[1]][j]) + 2
+    end <- regexpr("%",levels[[1]][j]) - 1
+    population_structure[i, j+1] <- as.numeric(substr(levels[[1]][j], start, end))
+  }
+}
+
+# Another Example
+test <- read_html("~/Documents/TEACHING/glhlth758/factbook/fields/print_2091.html")
+t <- test %>% html_table(fill = TRUE)
+IM <- matrix(0, 231, 4)
+colnames(IM) <- c("country", "IM_total", "IM_male", "IM_female")
+for(i in 1:231){
+  IM[i, 1] <- t[[1]][i,1]
+  levels <- strsplit(t[[1]][i,2], "births")
+  for(j in 1:3){
+    start <- regexpr(":",levels[[1]][j]) + 2
+    end <- regexpr("d",levels[[1]][j]) - 2
+    IM[i, j+1] <- as.numeric(substr(levels[[1]][j], start[1], end[1]))
+  }
+}
+```
+
+ 

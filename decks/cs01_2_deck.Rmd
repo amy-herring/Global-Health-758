@@ -1,0 +1,274 @@
+---
+title: Birthweight
+output: 
+  revealjs::revealjs_presentation:
+    theme: night
+    highlight: espresso
+    center: true
+    transition: none
+    css: styles.css
+    fig_caption: true
+    reveal_options:
+      progress: true
+      slideNumber: true
+      
+  
+---
+
+```{r packages, echo=FALSE, message=FALSE, warning=FALSE}
+library(tidyverse)
+library(knitr)
+library(Hmisc)
+```
+
+## What is EDA?
+
+- Exploratory data analysis (EDA) is an approach to analyzing data sets to provide an overview of data characteristics
+
+- Often, EDA is visual, which will be our focus today
+
+- EDA can also be useful in identifying outlying observations as part ofo the data cleaning process
+
+## Data visualization
+
+> *"The simple graph has brought more information to the data analyst’s mind than any other device." — John Tukey*
+
+- Data visualization is the creation and study of the visual representation of data.
+
+- R is one of many tools for visualizing data , and many approaches/systems exist within R for making data visualizations
+
+## Read birth weight data into R
+We will use the NC birth data, and measure whether there is a relationship between the response, birthweight, and the explanatory variables, gestational age and biological sex.
+
+* Check for NAs in data - appear as 99, 9999
+* For now, remove the rows with missing values
+* Note these data have not been carefully cleaned but represent values on file in NC birth registry
+
+```{r readdata}
+#Read in birth data
+o_data <- read.csv("~/Documents/TEACHING/vitalstats/Yr1116Birth.csv", na.strings=c("99", "9999"))
+
+birth_data <- na.omit(o_data)
+```
+
+## Load Tidyverse
+- Many R functions have been made much easier to use by the Tidyverse package, which we will now load. If this is your first time using the package, type
+
+```{r tidyinstall, eval=FALSE}
+install.packages("tidyverse")
+```
+
+
+```{r tidylib, eval=FALSE}
+library(tidyverse)
+```
+
+
+## Peek at the Data
+
+```{r glimpse}
+glimpse(birth_data)
+```
+
+- How many birth records are in the data?
+- How many variables accompany each record?
+- How are the variables coded?
+
+## Coding Woes
+```{r table}
+table(birth_data$SEX)
+table(birth_data$MRACER)
+```
+Ok, I can make a very good guess at the coding for the sex variable based on knowledge of the birth ratio in the US, but maternal race is trickier. Ideally we would have more informative labels for these values in our data.
+
+## Value Labels
+
+Value labels are useful to help us remember whether 1=boys and 2=girls or the opposite. Value labels are not necessary for continuous or count variables but can be quite helpful for keeping track of categorical data. Let's add labels to sex, maternal race, and maternal Hispanic ethnicity (county is another good candidate, but NC has 100 counties, so I'll save the typing for you!), using the vital records data dictionary as a key.
+
+```{r valuelabels, warning=FALSE}
+birth_data$SEX=factor(birth_data$SEX, levels=c(1,2,9),labels=c("Male","Female","Unspecified"))
+birth_data$MRACER=factor(birth_data$MRACER, levels=0:8, 
+                         labels=c("Other","White","Black",
+                                  "Ind. Amer",
+                                  "Chinese","Japanese","Nat. HI",
+                                  "Filipino","Other As"))
+birth_data$MHISP=factor(birth_data$MHISP, levels=c("C","M","N","O","P","S","U"), 
+                        labels=c("Cuban","Mexican","Non-Hispanic","Other Hispanic",
+                                "Puerto Rican","Central/South American","Unknown"))
+                      
+```
+
+## Value labels
+
+
+```{r table2}
+table(birth_data$SEX)
+table(birth_data$MRACER)
+```
+Much better!
+
+
+## ggplot2
+
+- ggplot2 is a data visualization package that is part of the tidyverse 
+suite of packages
+
+
+## ggplot2
+
+
+- In ggplot2 the structure of the code for plots can often be summarized as
+```{r show1, eval = FALSE}
+ggplot + 
+  geom_xxx
+```
+
+or, more precisely
+
+```{r show2 , eval = FALSE}
+ggplot(data = [dataset], mapping = aes(x = [x-variable], y = [y-variable])) +
+   geom_xxx() +
+   other options
+```
+
+
+- Geoms, short for geometric objects, describe the type of plot you will produce
+- Don't worry, we'll go through several examples!
+
+## Exploring Birth Weight Distribution 
+
+  
+```{r histogram, out.width = '70%', echo=FALSE }
+ggplot(data = birth_data, mapping = aes(x = BWTG)) +
+  geom_histogram(binwidth = 200) + xlab("Birth weight (g)") 
+```
+
+
+
+## Exploring the birth weight data
+
+<div class="question">
+Make a prediction: What relationship do you expect to see between gestational age and birth weight?
+</div>
+
+## <small> Weight as a function of gestational age </small>
+
+```{r scatterplot, out.width='50%'}
+ggplot(data = birth_data, mapping = aes(x = GEST, y = BWTG)) +
+  geom_point() + xlab("Gestational age (weeks)") + ylab("Birth weight (g)") + 
+  ggtitle("NC Births, 2011-2016")
+```
+
+- Time for data cleaning!  (Unless an Asian elephant snuck in....)
+- Why does the plot have a barred structure?
+
+## Data Cleaning
+
+Because it will complicate all our plotting, we're going to set the gestational age of the baby that is presumably *NOT* an elephant given its weight (elephants have the longest gestation of all mammals) to NA. Because this is a file of live births, we're going to do the same to gestational periods less than 20 weeks and birth weights below 500 g. Ideally, we would use a criterion to flag unreasonable combinations of birth weight and gestational age as well (but we will save that for you, if you'd like!).
+
+```{r clean}
+birth_data$GEST_C=birth_data$GEST; birth_data$BWTG_C=birth_data$BWTG
+birth_data$GEST_C[birth_data$GEST_C>50]=NA
+birth_data$GEST_C[birth_data$GEST_C<20]=NA
+birth_data$BWTG_C[birth_data$BWTG_C<500]=NA
+
+```
+
+## <small> Birthweight by Gestational Age (Cleaned) </small>
+
+```{r scatterplotclean, out.width='50%'}
+ggplot(data = birth_data, mapping = aes(x = GEST_C, y = BWTG_C)) +
+  geom_point() + xlab("Gestational age (weeks)") + ylab("Birth weight (g)") + 
+  ggtitle("NC Births, 2011-2016")
+```
+
+Much better, though I still don't believe them all!
+
+## Extending the Plots
+
+Can display additional variables with
+
+- aesthetics (like shape, colour, size), or
+
+- faceting (small multiples displaying different subsets)
+
+## Aesthetics options
+
+Visual characteristics of plotting characters that can be **mapped to data** are
+
+- `color`
+
+- `size`
+
+- `shape`
+
+- `alpha` (transparency)
+
+## Weight by age by gender
+```{r wtagegender, out.width='50%', warning=FALSE}
+ggplot(data = birth_data, mapping = aes(x = GEST_C, y = BWTG_C, color=SEX)) +
+  geom_point() + xlab("Gestational age (weeks)") + ylab("Birth weight (g)") + 
+  ggtitle("NC Births, 2011-2016")
+```
+
+That's a bit hard to see with all the data points! 
+
+## Faceting options
+
+- Smaller plots that display different subsets of the data
+
+- Useful for exploring conditional relationships and large data
+
+## Weight by age by gender
+```{r wtagegendersplit, out.width='50%', warning=FALSE}
+ggplot(data = birth_data, mapping = aes(x = GEST_C, y = BWTG_C)) +
+  facet_grid(. ~ SEX) +
+  geom_point() + xlab("Gestational age (weeks)") + ylab("Birth weight (g)") + 
+  ggtitle("NC Births, 2011-2016")
+```
+
+
+## Adding a Scatterplot Smoother
+```{r scatterplotsmooth, out.width='50%', warning=FALSE}
+ggplot(data = birth_data, mapping = aes(x = GEST_C, y = BWTG_C)) +
+  geom_smooth() + geom_point() + xlab("Gestational age (weeks)") + ylab("Birth weight (g)") + 
+  ggtitle("NC Births, 2011-2016")
+```
+
+## Boxplots
+Box plots are a good way to compare distributions across groups.
+
+```{r box, out.width='50%'}
+ggplot(data = birth_data, mapping = aes(y = BWTG_C, x = SEX)) +
+  geom_boxplot() + ylab("Birth weight (g)")
+```
+
+
+## Bar plots
+Bar plots are a nice way to compare relative group sizes.
+
+```{r bar, out.width='60%'}
+ggplot(data = birth_data, mapping = aes(x = MRACER)) +
+  geom_bar() + xlab("Maternal race")
+```
+
+
+## Fix labels
+
+```{r barnew, out.width='70%'}
+ggplot(data = birth_data, mapping = aes(x = MRACER)) +
+  geom_bar() + coord_flip() + ylab("Maternal race")
+```
+
+
+
+## Segmented bar plots, counts
+
+
+```{r bar2, out.width='70%'}
+ggplot(data = birth_data, mapping = aes(x = MRACER, fill = MHISP)) +
+  geom_bar() + xlab("Maternal race")
+```
+
+
+

@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Getting The Data</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/yeti.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+
+
+<style type="text/css">code{white-space: pre;}</style>
+<style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; background-color: #f8f8f8; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+pre, code { background-color: #f8f8f8; }
+code > span.kw { color: #204a87; font-weight: bold; } /* Keyword */
+code > span.dt { color: #204a87; } /* DataType */
+code > span.dv { color: #0000cf; } /* DecVal */
+code > span.bn { color: #0000cf; } /* BaseN */
+code > span.fl { color: #0000cf; } /* Float */
+code > span.ch { color: #4e9a06; } /* Char */
+code > span.st { color: #4e9a06; } /* String */
+code > span.co { color: #8f5902; font-style: italic; } /* Comment */
+code > span.ot { color: #8f5902; } /* Other */
+code > span.al { color: #ef2929; } /* Alert */
+code > span.fu { color: #000000; } /* Function */
+code > span.er { color: #a40000; font-weight: bold; } /* Error */
+code > span.wa { color: #8f5902; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #000000; } /* Constant */
+code > span.sc { color: #000000; } /* SpecialChar */
+code > span.vs { color: #4e9a06; } /* VerbatimString */
+code > span.ss { color: #4e9a06; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #000000; } /* Variable */
+code > span.cf { color: #204a87; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #ce5c00; font-weight: bold; } /* Operator */
+code > span.pp { color: #8f5902; font-style: italic; } /* Preprocessor */
+code > span.ex { } /* Extension */
+code > span.at { color: #c4a000; } /* Attribute */
+code > span.do { color: #8f5902; font-weight: bold; font-style: italic; } /* Documentation */
+code > span.an { color: #8f5902; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #8f5902; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #8f5902; font-weight: bold; font-style: italic; } /* Information */
+</style>
+<style type="text/css">
+  pre:not([class]) {
+    background-color: white;
+  }
+</style>
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 45px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+
+.section h2 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h3 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h4 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h5 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h6 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Case Studies</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="policies.html">Policies</a>
+</li>
+<li>
+  <a href="Rbasics.html">R Basics</a>
+</li>
+<li>
+  <a href="cs01.html">Case Study 1</a>
+</li>
+<li>
+  <a href="cs02.html">Case Study 2</a>
+</li>
+<li>
+  <a href="cs03.html">Case Study 3</a>
+</li>
+<li>
+  <a href="cs04.html">Case Study 4</a>
+</li>
+<li>
+  <a href="cs_indiv.html">Individual Case Study</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Getting The Data</h1>
+
+</div>
+
+
+<div id="how-to-obtain-data-frames-from-cia-factbook" class="section level1">
+<h1>How to Obtain Data Frames From CIA Factbook</h1>
+<p>First, you will need to obtain the factbook from <a href="https://www.cia.gov/library/publications/download/" class="uri">https://www.cia.gov/library/publications/download/</a>. Click “factbook.zip” and this will download the entire factbook for you. Then you have two options for obtains your data sets:</p>
+<div id="option-1-rank-order-txt-files" class="section level2">
+<h2>Option 1: Rank Order Txt Files</h2>
+<p>Your first option is using the rank order section of the factbook which has txt files for each variable. However, the significant drawnback of this is that it only has one value for each country, i.e. you cannot use it to obtain a variable such as population structure since it has multiple values for each country.</p>
+<ul>
+<li>Remember to give your columns names.</li>
+<li>To find the corresponding number for each variable, e.g. 2119 for population, you use the “rankorderguide.html” and click on your desired variable. Then in the address bar at the top of the screen you can see the correct number for it.</li>
+<li>You may need to delete columns/clean the data to obtain the correct format.</li>
+</ul>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(readr)
+
+pop_data &lt;-<span class="st"> </span><span class="kw">read_table</span>(<span class="st">&quot;~/Documents/TEACHING/glhlth758/factbook/rankorder/rawdata_2119.txt&quot;</span>, <span class="dt">col_names =</span> <span class="kw">c</span>(<span class="st">&quot;X1&quot;</span>, <span class="st">&quot;country&quot;</span>,<span class="st">&quot;X3&quot;</span>, <span class="st">&quot;X4&quot;</span>, <span class="st">&quot;pop&quot;</span>))</code></pre></div>
+<pre><code>## Parsed with column specification:
+## cols(
+##   X1 = col_integer(),
+##   country = col_character(),
+##   X3 = col_character(),
+##   X4 = col_character(),
+##   pop = col_number()
+## )</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">pop_data &lt;-<span class="st"> </span>pop_data[,-<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">4</span>)] <span class="co"># remove blank columns</span>
+<span class="kw">save</span>(pop_data, <span class="dt">file=</span><span class="st">&quot;~/Documents/GitHub/case-studies/glhlth/decks/data/pop_data.RData&quot;</span>)
+
+IM_data &lt;-<span class="st"> </span><span class="kw">read_table</span>(<span class="st">&quot;~/Documents/TEACHING/glhlth758/factbook/rankorder/rawdata_2091.txt&quot;</span>, <span class="dt">col_names =</span> <span class="kw">c</span>(<span class="st">&quot;X1&quot;</span>, <span class="st">&quot;country&quot;</span>,<span class="st">&quot;X3&quot;</span>, <span class="st">&quot;X4&quot;</span>, <span class="st">&quot;infMort&quot;</span>))</code></pre></div>
+<pre><code>## Parsed with column specification:
+## cols(
+##   X1 = col_integer(),
+##   country = col_character(),
+##   X3 = col_character(),
+##   X4 = col_character(),
+##   infMort = col_double()
+## )</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r">IM_data &lt;-<span class="st"> </span>IM_data[,-<span class="kw">c</span>(<span class="dv">1</span>,<span class="dv">3</span>,<span class="dv">4</span>)]
+<span class="kw">save</span>(IM_data, <span class="dt">file=</span><span class="st">&quot;~/Documents/GitHub/case-studies/glhlth/decks/data/IM_data.RData&quot;</span>)</code></pre></div>
+</div>
+<div id="option-2-field-html-files" class="section level2">
+<h2>Option 2: Field HTML Files</h2>
+<p>Your second option is to use the field html files. These have the advantage of being more complete and more detailed information on each variable. However, they are also in a less user-friendly format.</p>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="kw">library</span>(rvest)</code></pre></div>
+<pre><code>## Loading required package: xml2</code></pre>
+<pre><code>## 
+## Attaching package: &#39;rvest&#39;</code></pre>
+<pre><code>## The following object is masked from &#39;package:readr&#39;:
+## 
+##     guess_encoding</code></pre>
+<div class="sourceCode"><pre class="sourceCode r"><code class="sourceCode r"><span class="co"># read in data</span>
+test &lt;-<span class="st"> </span><span class="kw">read_html</span>(<span class="st">&quot;~/Documents/TEACHING/glhlth758/factbook/fields/print_2010.html&quot;</span>)
+t &lt;-<span class="st"> </span>test %&gt;%<span class="st"> </span><span class="kw">html_table</span>(<span class="dt">fill =</span> <span class="ot">TRUE</span>) <span class="co"># converts html to a list</span>
+
+<span class="co"># Extracting the desired data</span>
+<span class="co"># First view the data and determine what parts of the data we need</span>
+<span class="co"># I recommend clicking on t in the environment to look at its structure more easily</span>
+<span class="co"># head(t)</span>
+
+<span class="co"># create an empty data frame to hold our data</span>
+population_structure &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">0</span>, <span class="dv">231</span>, <span class="dv">6</span>)
+<span class="kw">colnames</span>(population_structure) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;country&quot;</span>, <span class="st">&quot;ps_0-14&quot;</span>, <span class="st">&quot;ps_15-24&quot;</span>, <span class="st">&quot;ps_25-54&quot;</span>, <span class="st">&quot;ps_55-64&quot;</span>, <span class="st">&quot;ps_65+&quot;</span>)
+
+<span class="co"># filling the data frame</span>
+for(i in <span class="dv">1</span>:<span class="dv">231</span>){
+  <span class="co"># getting country</span>
+  population_structure[i, <span class="dv">1</span>] &lt;-<span class="st"> </span>t[[<span class="dv">1</span>]][i,<span class="dv">1</span>]
+  <span class="co"># splitting based on category</span>
+  levels &lt;-<span class="st"> </span><span class="kw">strsplit</span>(t[[<span class="dv">1</span>]][i,<span class="dv">2</span>], <span class="st">&quot;)&quot;</span>)
+  for(j in <span class="dv">1</span>:<span class="dv">5</span>){
+    <span class="co"># obtaining the relevant sections of the data</span>
+    start &lt;-<span class="st"> </span><span class="kw">regexpr</span>(<span class="st">&quot;:&quot;</span>,levels[[<span class="dv">1</span>]][j]) +<span class="st"> </span><span class="dv">2</span>
+    end &lt;-<span class="st"> </span><span class="kw">regexpr</span>(<span class="st">&quot;%&quot;</span>,levels[[<span class="dv">1</span>]][j]) -<span class="st"> </span><span class="dv">1</span>
+    population_structure[i, j<span class="dv">+1</span>] &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">substr</span>(levels[[<span class="dv">1</span>]][j], start, end))
+  }
+}
+
+<span class="co"># Another Example</span>
+test &lt;-<span class="st"> </span><span class="kw">read_html</span>(<span class="st">&quot;~/Documents/TEACHING/glhlth758/factbook/fields/print_2091.html&quot;</span>)
+t &lt;-<span class="st"> </span>test %&gt;%<span class="st"> </span><span class="kw">html_table</span>(<span class="dt">fill =</span> <span class="ot">TRUE</span>)
+IM &lt;-<span class="st"> </span><span class="kw">matrix</span>(<span class="dv">0</span>, <span class="dv">231</span>, <span class="dv">4</span>)
+<span class="kw">colnames</span>(IM) &lt;-<span class="st"> </span><span class="kw">c</span>(<span class="st">&quot;country&quot;</span>, <span class="st">&quot;IM_total&quot;</span>, <span class="st">&quot;IM_male&quot;</span>, <span class="st">&quot;IM_female&quot;</span>)
+for(i in <span class="dv">1</span>:<span class="dv">231</span>){
+  IM[i, <span class="dv">1</span>] &lt;-<span class="st"> </span>t[[<span class="dv">1</span>]][i,<span class="dv">1</span>]
+  levels &lt;-<span class="st"> </span><span class="kw">strsplit</span>(t[[<span class="dv">1</span>]][i,<span class="dv">2</span>], <span class="st">&quot;births&quot;</span>)
+  for(j in <span class="dv">1</span>:<span class="dv">3</span>){
+    start &lt;-<span class="st"> </span><span class="kw">regexpr</span>(<span class="st">&quot;:&quot;</span>,levels[[<span class="dv">1</span>]][j]) +<span class="st"> </span><span class="dv">2</span>
+    end &lt;-<span class="st"> </span><span class="kw">regexpr</span>(<span class="st">&quot;d&quot;</span>,levels[[<span class="dv">1</span>]][j]) -<span class="st"> </span><span class="dv">2</span>
+    IM[i, j<span class="dv">+1</span>] &lt;-<span class="st"> </span><span class="kw">as.numeric</span>(<span class="kw">substr</span>(levels[[<span class="dv">1</span>]][j], start[<span class="dv">1</span>], end[<span class="dv">1</span>]))
+  }
+}</code></pre></div>
+</div>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

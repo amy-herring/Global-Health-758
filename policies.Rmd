@@ -13,7 +13,7 @@ library(tidyverse)
 
 ###Diversity & Inclusiveness:
 
-The Duke University Community Commitment states: ``Because diversity is essential to fulfilling the university’s mission, Duke is committed to building an inclusive and diverse university community.  Every student, faculty, and staff member —whatever their race, gender, age, ethnicity, cultural heritage or nationality; religious or political beliefs; sexual orientation or gender identity; or socioeconomic, veteran or ability status—has the right to inclusion, respect, agency and voice in the Duke community.  Further, all members of the University community have a responsibility to uphold these values and actively foster full participation in university life.''
+The Duke University Community Commitment states: "Because diversity is essential to fulfilling the university’s mission, Duke is committed to building an inclusive and diverse university community.  Every student, faculty, and staff member —whatever their race, gender, age, ethnicity, cultural heritage or nationality; religious or political beliefs; sexual orientation or gender identity; or socioeconomic, veteran or ability status—has the right to inclusion, respect, agency and voice in the Duke community.  Further, all members of the University community have a responsibility to uphold these values and actively foster full participation in university life."
 
 It is my goal for our learning environment to facilitate learning and intellectual development for everyone. To help accomplish this:
   
@@ -32,39 +32,39 @@ To uphold the Duke Community Standard:
 - I will conduct myself honorably in all my endeavors; and
 - I will act if the Standard is compromised.
 
-Cheating or plagiarism on assignments, lying about an illness or absence and other forms of academic dishonesty are a breach of trust with classmates and faculty, violate the <a href="http://www.studentaffairs.duke.edu/conduct/resources/dcs">Duke Community Standard</a>, and will not be tolerated. Such incidences will result in a 0 grade.  Additionally, there may be penalties to your final class grade along with being reported to the <a href="http://www.studentaffairs.duke.edu/conduct/about/ucbhearings">Undergraduate Conduct Board</a>.
+Cheating or plagiarism on assignments, lying about an illness or absence and other forms of academic dishonesty are a breach of trust with classmates and faculty, violate the <a href="http://www.studentaffairs.duke.edu/conduct/resources/dcs">Duke Community Standard</a>, and will not be tolerated. Such incidences will result in a 0 grade.  Additionally, there may be penalties to your final class grade along with being reported to the Graduate School.
 
 Please review the Academic Dishonesty policies <a href="https://studentaffairs.duke.edu/conduct">here</a>. 
 
-- Several datasets we are privileged to use in class are confidential and cannot be distributed more broadly. Further dissemination of such datasets, made available on Sakai, will be considered a violation of the Duke Community Standard. If you are unsure whether you can use a dataset for purposes beyond STA 440, please ask me.
+- Several datasets we are privileged to use in class are confidential and cannot be distributed more broadly. Further dissemination of such datasets, made available on Sakai, will be considered a violation of the Duke Community Standard. If you are unsure whether you can use a dataset for purposes beyond class, please ask me.
 
 - Much of the work assigned in class is collaborative. The individual case study must be completed independently. In addition, regular assessments must be completed individually before they are tackled by the group. 
 
-**Referencing code:** The web contains an enormous volume of code that you may find useful. You are welcome to make use of any online resources (e.g. StackOverflow), but you must explicitly cite your sources. Any recycled code that is discovered and is not explicitly cited will be treated as plagiarism. On the individual case study you may not directly share code with another student in this class, and on team assignments you may not share code with another team in this class (you are welcome to discuss the problems together and ask for advice, but you may not send or make use of code from another team). 
+**Referencing code:** The web contains an enormous volume of code that you may find useful. You are welcome to make use of any online resources, but you must explicitly cite your sources. Any recycled code that is discovered and is not explicitly cited will be treated as plagiarism. On the individual case study you may not directly share code with another student in this class, and on team assignments you may not share code with another team in this class (you are welcome to discuss the problems together and ask for advice, but you may not send or make use of code from another team). 
 
 ### Course components:
 
 #### Class sessions:
 
-If you miss class or would like to review the material covered in class, you can view the recordings [here](https://trinity.capture.duke.edu/Panopto/Pages/Sessions/List.aspx?folderID=9161c49e-b3d5-4d40-a282-ebe8a938055d). AMY UPDATE LINK Note that you will need to log in with your Net ID.
+If you miss class or would like to review the material covered in class, you can view the recordings [here](https://trinity.capture.duke.edu/Panopto/Pages/Sessions/List.aspx?folderID=9161c49e-b3d5-4d40-a282-ebe8a938055d). NEED TO UPDATE LINK Note that you will need to log in with your Net ID.
 
 #### Teams:
 
 On the first day of class, we will develop teams of 5-7 students - these teams will stay consistent 
 throughout the semester (barring extraordinary circumstances). You will work in these teams during 
-class and on the five group case studies. The process of forming teams will be completely transparent 
+class and on the group case studies. The process of forming teams will be completely transparent 
 and based on self-reported data.
 
 #### Case Studies:
 
-STA 440 involves detailed analysis of a series of case studies using current, relevant data. Each case study will involve a final submission and in some cases one or more interim submissions. Points will be allocated separately for each submission and case study based on the scope of work. Final case study submissions will involve both a written report and an oral presentation to be viewed by the other teams (in class or by video, as assigned). 
+GLHLTH 758 involves detailed analysis of a series of case studies using current, relevant data. Each case study will involve a final submission and in some cases one or more interim submissions. Final case study submissions will involve a written report and may involve an oral presentation to be viewed by the other teams (in class or by video, as assigned). 
 
 Additional details on the case studies will be provided as the course progresses.
 
-Individual contributions to each submission will be assessed using the fair division software Spliddit. Team members must provide Spliddit assessments in order to receive credit for an assignment.
+Individual contributions to each group submission will be assessed using the fair division software Spliddit. Team members must provide Spliddit assessments in order to receive credit for an assignment.
 
 
-Each individual case study will be graded based on written reports (interim and final) and an oral presentation. Students may not collaborate with anyone on the individual case study, which should be treated like a take-home exam.
+Each individual case study will be graded based on written reports and an oral presentation. Students may not collaborate with anyone on the individual case study, which should be treated like a take-home exam, except as part of in-class structured opportunities for feedback throughout the semester.
 
 Each case study will have a page limit, and under no circumstances should font sizes less than 11 point be used, with the exception of labels in figures (and then only if they are still clearly legible to readers of all ages).
 
@@ -99,14 +99,11 @@ The total number of group project points over the course of the semester is $N\s
 
 ### Excused Absences:
 
-Students who miss a class due to a scheduled varsity trip, religious holiday, or short-term illness should fill out an online <a href="http://trinity.duke.edu/academic-requirements?p=notification-of-varsity-athletic-participation-novap">NOVAP</a>, <a href="http://trinity.duke.edu/academic-requirements?p=religious-observance">RHoliday</a> or <a href="http://trinity.duke.edu/academic-requirements?p=policy-short-term-illness-notification">short-term illness</a> form respectively. Note that these excused absences do not excuse you from assigned case studies; it is your responsibility to make alternative arrangements with your team to participate.
+Students who miss a class due to a religious holiday or short-term illness should let me know as soon as possible. Note that these excused absences do not excuse you from assigned case studies; it is your responsibility to make alternative arrangements with your team to participate.
 
 If you are faced with a personal or family emergency or a
-chronic health condition that interferes with your ability to attend or 
-complete classes, you should contact your academic dean’s office. See more 
-information on policies surrounding these conditions 
-at https://trinity.duke.edu/undergraduate/academic-policies/personal-emergencies. 
-Your academic dean can also provide more information.
+chronic health condition that interferes with your ability to attend or
+complete classes, please let me know right away, and we can make a plan.
 
 ### Late / missed work
 
@@ -115,9 +112,9 @@ Late work policy for case study reports:
 - late, but within 24 hours of due date/time: -20%
 - any later: no credit
 
-- Late work will not be accepted for the election case study November 5 submission or the individual case study. Missed application exercises cannot be made up (the bottom 20% will be dropped).
+- Late work will not be accepted for the individual case study. Missed application exercises cannot be made up (the bottom 20% will be dropped).
 
-- You must complete the individual case study and be in class to present it in order to pass this course.
+- You must complete the individual case study and present it to the class in order to pass this course.
 
 ### Regrade requests
 

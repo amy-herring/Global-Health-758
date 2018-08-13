@@ -1,5 +1,5 @@
 ---
-title: "Case Study 1: Birthweight"
+title: "Case Study 1: Healthy Babies, Healthy Moms"
 ---
 
 ```{r, echo=FALSE, include=FALSE}
@@ -11,9 +11,8 @@ library(tidyverse)
 
 # Learning Objectives
 
-- practice model building and validation
-- explore use of robust regression methods to accommodate outliers and extreme events
-- use causal inference methods to evaluate potential policy interventions
+- gain programming skills in RStudio
+- 
 
 # Case Study Goals
 
@@ -25,7 +24,8 @@ library(tidyverse)
 
 # Data
 
-- The data for this case study cannot be shared beyond class participants. Please see Sakai for the data and related documentation, and do not disseminate the data any further.
+- North Carolina Birth Records: these data cannot be shared beyond class participants. Please see Sakai for the data and related documentation, and do not disseminate the data any further.
+- Worldwide country-level data on maternal and infant outcomes: publicly available
 
 # Reports
 
@@ -43,11 +43,8 @@ An Introduction to Statistical Learning with Applications in R, James et al (201
 
 [Initial description of case study](decks/cs01_1_deck.html)
 
-[Cross-validation](decks/cs01_2_deck.html)
+[Birth weight](decks/cs01_2_deck.html)
 
-[Robust regression](decks/cs01_3_deck.html)
+[Mapping infant mortality](decks/cs01_3_deck.html)
 
-[Causal inference-Liz to create](decks/cs01_4_deck.html)
-
-Why do I care about outliers?  Talk about financial crisis. Amy to do.
 

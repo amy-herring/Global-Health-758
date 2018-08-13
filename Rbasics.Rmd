@@ -1,0 +1,29 @@
+---
+title: "Getting Started in R/RStudio"
+---
+
+```{r, echo=FALSE, include=FALSE}
+library(kableExtra)
+library(knitr)
+library(tidyverse)
+```
+
+This document will provide links needed to download and install R and RStudio on your machine. Both software packages are free and a great choice not only for resource-limited settings but for data science applications more generally.
+
+# Download and Install R and RStudio
+
+- [RStudio Download](https://www.rstudio.com/products/rstudio/download/)
+- [R Download](https://cran.rstudio.com)
+- [Nice Walkthrough of RStudio Download Process on Mac](https://www.youtube.com/watch?v=JbTMvQ-SbvQ&index=12&list=PLDWCGvw0A7lUIKbsM-6BHpS8KfXFT9JSt)
+- [Walkthrough of Downloading Both R and RStudio](https://www.youtube.com/watch?v=cX532N_XLIs&list=PLDWCGvw0A7lUIKbsM-6BHpS8KfXFT9JSt&index=8)
+
+# Basics of R Studio
+
+We will provide required code in class. Before class, watch the short video on getting started in RStudio. For those who want more information, Duke has produced a longer video. The free online text **R for Data Science** by Grolemund and Wickham is a great resource.
+
+- [Short video on getting started](https://www.youtube.com/watch?v=eBJ9Yo6flsM&list=PLDWCGvw0A7lUIKbsM-6BHpS8KfXFT9JSt)
+- [Long (~2 hours) video introducing R Studio (optional)](https://library.capture.duke.edu/Panopto/Pages/Viewer.aspx?id=651c273a-f1b0-485b-bf47-6bd61e304020)
+- [R for Data Science](http://r4ds.had.co.nz/index.html)
+
+
+

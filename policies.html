@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title>Policies</title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/yeti.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 45px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+
+.section h2 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h3 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h4 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h5 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h6 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = false;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Case Studies</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="policies.html">Policies</a>
+</li>
+<li>
+  <a href="Rbasics.html">R Basics</a>
+</li>
+<li>
+  <a href="cs01.html">Case Study 1</a>
+</li>
+<li>
+  <a href="cs02.html">Case Study 2</a>
+</li>
+<li>
+  <a href="cs03.html">Case Study 3</a>
+</li>
+<li>
+  <a href="cs04.html">Case Study 4</a>
+</li>
+<li>
+  <a href="cs_indiv.html">Individual Case Study</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+<h1 class="title toc-ignore">Policies</h1>
+
+</div>
+
+
+<div id="diversity-inclusiveness" class="section level3">
+<h3>Diversity &amp; Inclusiveness:</h3>
+<p>The Duke University Community Commitment states: “Because diversity is essential to fulfilling the university’s mission, Duke is committed to building an inclusive and diverse university community. Every student, faculty, and staff member —whatever their race, gender, age, ethnicity, cultural heritage or nationality; religious or political beliefs; sexual orientation or gender identity; or socioeconomic, veteran or ability status—has the right to inclusion, respect, agency and voice in the Duke community. Further, all members of the University community have a responsibility to uphold these values and actively foster full participation in university life.”</p>
+<p>It is my goal for our learning environment to facilitate learning and intellectual development for everyone. To help accomplish this:</p>
+<ul>
+<li>If you have a name and/or set of pronouns that differ from those that appear in your official Duke records, please let me know!</li>
+<li>We are constantly learning more about diverse perspectives and identities. If something was said in class (by anyone) that made you feel uncomfortable, please talk to me about it.</li>
+</ul>
+</div>
+<div id="academic-integrity" class="section level3">
+<h3>Academic integrity:</h3>
+<p>Duke University is a community dedicated to scholarship, leadership, and service and to the principles of honesty, fairness, respect, and accountability. Citizens of this community commit to reflect upon and uphold these principles in all academic and nonacademic endeavors, and to protect and promote a culture of integrity.</p>
+<p>Remember the Duke Community Standard that you have agreed to abide by:</p>
+<p>To uphold the Duke Community Standard:</p>
+<ul>
+<li>I will not lie, cheat, or steal in my academic endeavors;</li>
+<li>I will conduct myself honorably in all my endeavors; and</li>
+<li>I will act if the Standard is compromised.</li>
+</ul>
+<p>Cheating or plagiarism on assignments, lying about an illness or absence and other forms of academic dishonesty are a breach of trust with classmates and faculty, violate the <a href="http://www.studentaffairs.duke.edu/conduct/resources/dcs">Duke Community Standard</a>, and will not be tolerated. Such incidences will result in a 0 grade. Additionally, there may be penalties to your final class grade along with being reported to the Graduate School.</p>
+<p>Please review the Academic Dishonesty policies <a href="https://studentaffairs.duke.edu/conduct">here</a>.</p>
+<ul>
+<li><p>Several datasets we are privileged to use in class are confidential and cannot be distributed more broadly. Further dissemination of such datasets, made available on Sakai, will be considered a violation of the Duke Community Standard. If you are unsure whether you can use a dataset for purposes beyond class, please ask me.</p></li>
+<li><p>Much of the work assigned in class is collaborative. The individual case study must be completed independently. In addition, regular assessments must be completed individually before they are tackled by the group.</p></li>
+</ul>
+<p><strong>Referencing code:</strong> The web contains an enormous volume of code that you may find useful. You are welcome to make use of any online resources, but you must explicitly cite your sources. Any recycled code that is discovered and is not explicitly cited will be treated as plagiarism. On the individual case study you may not directly share code with another student in this class, and on team assignments you may not share code with another team in this class (you are welcome to discuss the problems together and ask for advice, but you may not send or make use of code from another team).</p>
+</div>
+<div id="course-components" class="section level3">
+<h3>Course components:</h3>
+<div id="class-sessions" class="section level4">
+<h4>Class sessions:</h4>
+<p>If you miss class or would like to review the material covered in class, you can view the recordings <a href="https://trinity.capture.duke.edu/Panopto/Pages/Sessions/List.aspx?folderID=9161c49e-b3d5-4d40-a282-ebe8a938055d">here</a>. NEED TO UPDATE LINK Note that you will need to log in with your Net ID.</p>
+</div>
+<div id="teams" class="section level4">
+<h4>Teams:</h4>
+<p>On the first day of class, we will develop teams of 5-7 students - these teams will stay consistent throughout the semester (barring extraordinary circumstances). You will work in these teams during class and on the group case studies. The process of forming teams will be completely transparent and based on self-reported data.</p>
+</div>
+<div id="case-studies" class="section level4">
+<h4>Case Studies:</h4>
+<p>GLHLTH 758 involves detailed analysis of a series of case studies using current, relevant data. Each case study will involve a final submission and in some cases one or more interim submissions. Final case study submissions will involve a written report and may involve an oral presentation to be viewed by the other teams (in class or by video, as assigned).</p>
+<p>Additional details on the case studies will be provided as the course progresses.</p>
+<p>Individual contributions to each group submission will be assessed using the fair division software Spliddit. Team members must provide Spliddit assessments in order to receive credit for an assignment.</p>
+<p>Each individual case study will be graded based on written reports and an oral presentation. Students may not collaborate with anyone on the individual case study, which should be treated like a take-home exam, except as part of in-class structured opportunities for feedback throughout the semester.</p>
+<p>Each case study will have a page limit, and under no circumstances should font sizes less than 11 point be used, with the exception of labels in figures (and then only if they are still clearly legible to readers of all ages).</p>
+</div>
+<div id="application-exercises" class="section level4">
+<h4>Application exercises:</h4>
+<p>Short exercises will frequently be administered at the begininning of class to assess progress and identify areas for further development. Students will first complete these individually and hand them in; subsequently, the group will discuss the exercise and turn in a group solution.</p>
+<p>Students who miss individual and group submissions (due to late arrival or absence) will receive 0 points for those submissions. However, only the top 80% of submissions (separately for individual and group submissions) will count towards a student’s point total.</p>
+</div>
+</div>
+<div id="grading" class="section level3">
+<h3>Grading:</h3>
+<p>Your final grade will be comprised of the following:</p>
+<table>
+<thead>
+<tr class="header">
+<th>Component</th>
+<th>% of Grade</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Individual exercises</td>
+<td>10%</td>
+</tr>
+<tr class="even">
+<td>Group exercises</td>
+<td>15%</td>
+</tr>
+<tr class="odd">
+<td>Group case studies</td>
+<td>60%</td>
+</tr>
+<tr class="even">
+<td>Individual case study</td>
+<td>15%</td>
+</tr>
+</tbody>
+</table>
+<p>Class attendance is a firm expectation; frequent absences or late arrivals are a legitimate cause for grade reduction.</p>
+<p>Cumulative numerical averages of 90 - 100 are guaranteed at least an A-, 80 - 89 at least a B-, and 70 - 79 at least a C-; however, the exact ranges for letter grades will be determined at the end of the semester. The more evidence there is that the class is performing at the highest level, the higher the grade distribution will be.</p>
+<p>The grade for each group case study submission will be based on two components: (1) an overall score assigned to the work submitted, and (2) individual contribution to the work (as assessed by team members on Spliddit). Each team member’s grade on each submission <span class="math inline">\(s=1,\ldots,S\)</span> will be determined by taking the total number of team points available (points <span class="math inline">\(P_s\)</span> available for the assignment multiplied by <span class="math inline">\(N\)</span>, the number of team members) and assigning them proportionately to team members’ assessments of the division of work.</p>
+<p>Example: Suppose a submission is worth 100 points, and the team has 5 members. If the score (1) is 90, and all 5 team members contribute equally (20% of the work each), then each team member receives 450/5=90 points for the submission. If the contributions of the team members are (35%, 30%, 20%, 10%, 5%), then their respective grades are 157.5, 135, 90, 45, and 22.5 (i.e., 7 times the work yields 7 times the points).</p>
+<p>The total number of group project points over the course of the semester is <span class="math inline">\(N\sum_{s=1}^S P_s\)</span>, and the maximum number of points that will be awarded to any team member in total for group projects is <span class="math inline">\(100S\)</span>. This ensures (1) team members are able to adjust their effort levels on projects according to their interests and other time commitments, (2) teams are encouraged to ensure contributions over the course of the semester are balanced across team members, and (3) individuals who do not make strong contributions to the team will receive clear feedback regarding the need for adjustments to their efforts.</p>
+</div>
+<div id="excused-absences" class="section level3">
+<h3>Excused Absences:</h3>
+<p>Students who miss a class due to a religious holiday or short-term illness should let me know as soon as possible. Note that these excused absences do not excuse you from assigned case studies; it is your responsibility to make alternative arrangements with your team to participate.</p>
+<p>If you are faced with a personal or family emergency or a chronic health condition that interferes with your ability to attend or complete classes, please let me know right away, and we can make a plan.</p>
+</div>
+<div id="late-missed-work" class="section level3">
+<h3>Late / missed work</h3>
+<p>Late work policy for case study reports:</p>
+<ul>
+<li>late, but within 24 hours of due date/time: -20%</li>
+<li><p>any later: no credit</p></li>
+<li><p>Late work will not be accepted for the individual case study. Missed application exercises cannot be made up (the bottom 20% will be dropped).</p></li>
+<li><p>You must complete the individual case study and present it to the class in order to pass this course.</p></li>
+</ul>
+</div>
+<div id="regrade-requests" class="section level3">
+<h3>Regrade requests</h3>
+<p>Regrade requests must be made within three days of when a report is returned. These will be honored if points were tallied incorrectly, or if you feel part of your report is correct, but it was marked wrong. No regrade will be made to alter the number of points deducted for an issue. There will be no grade changes after the individual project presentations.</p>
+</div>
+<div id="professionalism" class="section level3">
+<h3>Professionalism</h3>
+<ul>
+<li>Please refrain from texting or using your computer for anything other than coursework during class.</li>
+</ul>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

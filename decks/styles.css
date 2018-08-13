@@ -1,0 +1,11 @@
+
+/*background color*/
+body {
+  background-color: SteelBlue;
+}
+
+/*header font size*/
+.reveal section h1 {
+  font-size: 2em;
+}
+

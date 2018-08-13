@@ -7,17 +7,17 @@ output:
 ---
 
 ---
-title: "STA 440: Case Studies in the Practice of Statistics"
-description: "Students apply statistical analysis skills to in-depth data analysis projects ranging across diverse application areas including politics, information and culture, the environment, social science, global health, and health disparities. Students practice cutting-edge statistical methods and communicate their results both technically and non-technically via presentations and written reports. Prerequisite: STA360 or instructor permission. QS, R, W"
+title: "GLHLTH 758: Case Studies in Data Science"
+description: "Application of statistical and data science skills to in-depth data analysis projects in global health. Principled use and interpretation of modern tools, including data wrangling and munging, visualization, exploratory analysis, predictive modeling, and inference using modern statistical software applied to global health data. Emphasis on communication of analysis results both technically and non-technically via presentations and written reports. Students must have access to data for course project. Prerequisite: GLHLTH 705"
 markup: "mmark"
 ---
 
 
 ### Lectures
 
-<font color="#6CA0DC"><i class="fas fa-university fa-lg"></i></font> &nbsp; Perkins 071 
+<font color="#6CA0DC"><i class="fas fa-university fa-lg"></i></font> &nbsp; Trent 124 
 
-<font color="#6CA0DC"><i class="fas fa-calendar-alt fa-lg"></i></font> &nbsp; WF 11:45 - 1:00
+<font color="#6CA0DC"><i class="fas fa-calendar-alt fa-lg"></i></font> &nbsp; WF 8:30-9:45
 
 
 ### Teaching team and office hours 
@@ -25,11 +25,7 @@ markup: "mmark"
 | Team member | Office hours | Location |
 | ----------  | ----         | ---- |
 | [Professor Amy Herring](https://stat.duke.edu/people/amy-h-herring)  <a href="mailto:amy.herring@duke.edu" title="email"><i class="fa fa-envelope"></i></a> &nbsp;  | Wed and Thurs 1:30-2:30pm | 208 Old Chemistry |
-[TA Alex Mang](https://stat.duke.edu/people/alexander-mang-0)  <a href="mailto:alexander.mang@duke.edu" title="email"><i class="fa fa-envelope"></i></a> &nbsp; | Wed 6:00 - 8:00 pm ??? | 211A Old Chemistry
- [TA TBA](https://lindsayberry.github.io)  <a href="mailto:lindsay.berry@duke.edu" title="email"><i class="fa fa-envelope"></i></a> &nbsp;  | Tue 1-2pm?? | 211A Old Chemistry
- 
-                  
-
+[TA Kelly Moran](https://www.krellinst.org/csgf/fellows/profile?n=moran2016)  <a href="mailto:kelly.moran@duke.edu" title="email"><i class="fa fa-envelope"></i></a> &nbsp; | Wed 6:00 - 8:00 pm ??? | 211A Old Chemistry??? Maybe at DGHI?
 
 ### Materials
 
@@ -37,6 +33,8 @@ You should have access to a laptop and bring it to every class, fully charged. T
 
 
 ### Topics and Important Dates
+Note: this schedule is approximate and is likely to be modified as the course progresses
+
 |Date           |Topic                      |Deliverables     |
 | ----------    | -----------------         | --------------- |
 | August 29     | Welcome, Groups, and CS1: Birth Weight        | Regression warm-up (in class)        |
@@ -67,5 +65,5 @@ You should have access to a laptop and bring it to every class, fully charged. T
 | November 30   | Individual CS Q&A | CS5: Final Report |
 | December 5    | Individual Presentations | Individual Reports Due |
 | December 7    | Individual Presentations | Individual Reports Due |
-| December 13, 2-5pm   | Individual Presentations | Individual Reports Due |
+
 

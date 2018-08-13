@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+
+<meta charset="utf-8" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta name="generator" content="pandoc" />
+
+
+
+
+<title></title>
+
+<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/yeti.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<script src="site_libs/jqueryui-1.11.4/jquery-ui.min.js"></script>
+<link href="site_libs/tocify-1.9.1/jquery.tocify.css" rel="stylesheet" />
+<script src="site_libs/tocify-1.9.1/jquery.tocify.js"></script>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+
+
+
+
+<style type="text/css">
+h1 {
+  font-size: 34px;
+}
+h1.title {
+  font-size: 38px;
+}
+h2 {
+  font-size: 30px;
+}
+h3 {
+  font-size: 24px;
+}
+h4 {
+  font-size: 18px;
+}
+h5 {
+  font-size: 16px;
+}
+h6 {
+  font-size: 12px;
+}
+.table th:not([align]) {
+  text-align: left;
+}
+</style>
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+</head>
+
+<body>
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+code {
+  color: inherit;
+  background-color: rgba(0, 0, 0, 0.04);
+}
+img {
+  max-width:100%;
+  height: auto;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+</style>
+
+
+<style type="text/css">
+/* padding for bootstrap navbar */
+body {
+  padding-top: 45px;
+  padding-bottom: 40px;
+}
+/* offset scroll position for anchor links (for fixed navbar)  */
+.section h1 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+
+.section h2 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h3 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h4 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h5 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+.section h6 {
+  padding-top: 50px;
+  margin-top: -50px;
+}
+</style>
+
+<script>
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.parent().addClass('active');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+});
+</script>
+
+
+<div class="container-fluid main-container">
+
+<!-- tabsets -->
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+</script>
+
+<!-- code folding -->
+
+
+
+
+<script>
+$(document).ready(function ()  {
+
+    // move toc-ignore selectors from section div to header
+    $('div.section.toc-ignore')
+        .removeClass('toc-ignore')
+        .children('h1,h2,h3,h4,h5').addClass('toc-ignore');
+
+    // establish options
+    var options = {
+      selectors: "h1,h2,h3",
+      theme: "bootstrap3",
+      context: '.toc-content',
+      hashGenerator: function (text) {
+        return text.replace(/[.\\/?&!#<>]/g, '').replace(/\s/g, '_').toLowerCase();
+      },
+      ignoreSelector: ".toc-ignore",
+      scrollTo: 0
+    };
+    options.showAndHide = true;
+    options.smoothScroll = true;
+
+    // tocify
+    var toc = $("#TOC").tocify(options).data("toc-tocify");
+});
+</script>
+
+<style type="text/css">
+
+#TOC {
+  margin: 25px 0px 20px 0px;
+}
+@media (max-width: 768px) {
+#TOC {
+  position: relative;
+  width: 100%;
+}
+}
+
+
+.toc-content {
+  padding-left: 30px;
+  padding-right: 40px;
+}
+
+div.main-container {
+  max-width: 1200px;
+}
+
+div.tocify {
+  width: 20%;
+  max-width: 260px;
+  max-height: 85%;
+}
+
+@media (min-width: 768px) and (max-width: 991px) {
+  div.tocify {
+    width: 25%;
+  }
+}
+
+@media (max-width: 767px) {
+  div.tocify {
+    width: 100%;
+    max-width: none;
+  }
+}
+
+.tocify ul, .tocify li {
+  line-height: 20px;
+}
+
+.tocify-subheader .tocify-item {
+  font-size: 0.90em;
+  padding-left: 25px;
+  text-indent: 0;
+}
+
+.tocify .list-group-item {
+  border-radius: 0px;
+}
+
+
+</style>
+
+<!-- setup 3col/9col grid for toc_float and main content  -->
+<div class="row-fluid">
+<div class="col-xs-12 col-sm-4 col-md-3">
+<div id="TOC" class="tocify">
+</div>
+</div>
+
+<div class="toc-content col-xs-12 col-sm-8 col-md-9">
+
+
+
+
+<div class="navbar navbar-inverse  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Case Studies</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="policies.html">Policies</a>
+</li>
+<li>
+  <a href="Rbasics.html">R Basics</a>
+</li>
+<li>
+  <a href="cs01.html">Case Study 1</a>
+</li>
+<li>
+  <a href="cs02.html">Case Study 2</a>
+</li>
+<li>
+  <a href="cs03.html">Case Study 3</a>
+</li>
+<li>
+  <a href="cs04.html">Case Study 4</a>
+</li>
+<li>
+  <a href="cs_indiv.html">Individual Case Study</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div class="fluid-row" id="header">
+
+
+
+
+</div>
+
+
+<div id="lectures" class="section level3">
+<h3>Lectures</h3>
+<p><font color="#6CA0DC"><i class="fas fa-university fa-lg"></i></font>   Trent 124</p>
+<p><font color="#6CA0DC"><i class="fas fa-calendar-alt fa-lg"></i></font>   WF 8:30-9:45</p>
+</div>
+<div id="teaching-team-and-office-hours" class="section level3">
+<h3>Teaching team and office hours</h3>
+<table style="width:29%;">
+<colgroup>
+<col width="15%" />
+<col width="6%" />
+<col width="6%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Team member</th>
+<th>Office hours</th>
+<th>Location</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><a href="https://stat.duke.edu/people/amy-h-herring">Professor Amy Herring</a> <a href="mailto:amy.herring@duke.edu" title="email"><i class="fa fa-envelope"></i></a>  </td>
+<td>Wed and Thurs 1:30-2:30pm</td>
+<td>208 Old Chemistry</td>
+</tr>
+<tr class="even">
+<td><a href="https://www.krellinst.org/csgf/fellows/profile?n=moran2016">TA Kelly Moran</a> <a href="mailto:kelly.moran@duke.edu" title="email"><i class="fa fa-envelope"></i></a>  </td>
+<td>Wed 6:00 - 8:00 pm ???</td>
+<td>211A Old Chemistry??? Maybe at DGHI?</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="materials" class="section level3">
+<h3>Materials</h3>
+<p>You should have access to a laptop and bring it to every class, fully charged. Texts and readings will be assigned as needed. Required software packages include R/RStudio (free) and Tableau (free for students).</p>
+</div>
+<div id="topics-and-important-dates" class="section level3">
+<h3>Topics and Important Dates</h3>
+<p>Note: this schedule is approximate and is likely to be modified as the course progresses</p>
+<table style="width:62%;">
+<colgroup>
+<col width="15%" />
+<col width="25%" />
+<col width="22%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Date</th>
+<th>Topic</th>
+<th>Deliverables</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>August 29</td>
+<td>Welcome, Groups, and CS1: Birth Weight</td>
+<td>Regression warm-up (in class)</td>
+</tr>
+<tr class="even">
+<td>August 31</td>
+<td>CS1: Robust Regression</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>September 5</td>
+<td>CS1: Modeling in Class</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>September 7</td>
+<td>CS1: Causal Inference</td>
+<td>CS1 Interim Report: Model Development and Evaluation</td>
+</tr>
+<tr class="odd">
+<td>September 12</td>
+<td>CS2: Visualizing our World in Data</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>September 14</td>
+<td>CS2: Tableau</td>
+<td>CS1 Final Report: Smoking and Birth Weight</td>
+</tr>
+<tr class="odd">
+<td>September 19</td>
+<td>CS2: Tableau</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>Septmeber 21</td>
+<td>CS3: Hierarchical Models: Birth Weight Disparities</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>September 26</td>
+<td>Group Presentations of CS2</td>
+<td>CS2 Final Report: Our World in Data</td>
+</tr>
+<tr class="even">
+<td>Septmeber 28</td>
+<td>CS3: Multilevel Models: Time Trends</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>October 3</td>
+<td>CS3: Generalized Linear Mixed Effects Models</td>
+<td>CS3 Interim Report: Infant Mortality Visualization</td>
+</tr>
+<tr class="even">
+<td>October 5</td>
+<td>CS3: Bayesian Hierarchical Models</td>
+<td>Midsemester Grades Due (my deliverable) &amp; CS4 Evaluation Criteria</td>
+</tr>
+<tr class="odd">
+<td>October 10</td>
+<td>CS4: Election Forecasting</td>
+<td>CS3 Interim Report: County-Specific Mortality by Group</td>
+</tr>
+<tr class="even">
+<td>October 12</td>
+<td>CS4: Election Forecasting with “Mr. P”</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>October 17</td>
+<td>CS4: Who Votes in NC?</td>
+<td>CS3 Final Report: Infant Mortality Trends</td>
+</tr>
+<tr class="even">
+<td>October 19</td>
+<td>CS4: Election Modeling Workshop</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>October 24</td>
+<td>CS4: Presentations: Who Votes in NC?</td>
+<td>CS4 Interim Report: Who Votes in NC?</td>
+</tr>
+<tr class="even">
+<td>October 26</td>
+<td>Individual CS: Web Scraping</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>October 31</td>
+<td>Individual CS: Web Scraping</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>November 2</td>
+<td>Individual CS: Web Scraping Work in Groups</td>
+<td>CS4 Final Report due by Midnight Nov 5</td>
+</tr>
+<tr class="odd">
+<td>November 7</td>
+<td>CS4: Presentations: Post Election Diagnostics</td>
+<td>Individual CS Interim Report: Analysis Plan</td>
+</tr>
+<tr class="even">
+<td>November 9</td>
+<td>CS5: Missing Data: How to Survive</td>
+<td></td>
+</tr>
+<tr class="odd">
+<td>Movember 14</td>
+<td>CS5: Missing Data</td>
+<td></td>
+</tr>
+<tr class="even">
+<td>November 16</td>
+<td>CS5: Missing Data</td>
+<td>CS5 Interim Report: Patterns of Missing Data</td>
+</tr>
+<tr class="odd">
+<td>November 28</td>
+<td>CS Lab</td>
+<td>Individual CS Draft Report</td>
+</tr>
+<tr class="even">
+<td>November 30</td>
+<td>Individual CS Q&amp;A</td>
+<td>CS5: Final Report</td>
+</tr>
+<tr class="odd">
+<td>December 5</td>
+<td>Individual Presentations</td>
+<td>Individual Reports Due</td>
+</tr>
+<tr class="even">
+<td>December 7</td>
+<td>Individual Presentations</td>
+<td>Individual Reports Due</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+
+</div>
+</div>
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.header').parent('thead').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
