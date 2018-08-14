@@ -35,7 +35,7 @@ Much of the variability in birthweight is explained by gestational age at delive
 
 ## Case Study Data
 
-You will analyze data on birthweight and gestational age at delivery for babies born in North Carolina from 2011-2016. Relevant variables include the following.
+You will visualize data on birthweight and gestational age at delivery for babies born in North Carolina from 2011-2016. Relevant variables include the following.
 
 - Birthweight in g (primary outcome variable)
 - Gestational age in weeks (babies should gain weight until delivery)
@@ -58,9 +58,9 @@ You will analyze data on birthweight and gestational age at delivery for babies 
 
 ## Goals
 
-- determining which factors are associated with birthweight
+- visualizing factors in relation to birthweight
 
-- characterizing the relationship between each factor and birthweight
+- visually characterizing the relationship between each factor and birthweight
 
 
 

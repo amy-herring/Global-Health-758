@@ -13,19 +13,19 @@ markup: "mmark"
 ---
 
 
-### Lectures
+### Class Meetings
 
 <font color="#6CA0DC"><i class="fas fa-university fa-lg"></i></font> &nbsp; Trent 124 
 
-<font color="#6CA0DC"><i class="fas fa-calendar-alt fa-lg"></i></font> &nbsp; WF 8:30-9:45
+<font color="#6CA0DC"><i class="fas fa-calendar-alt fa-lg"></i></font> &nbsp; WF 8:30-9:45am
 
 
 ### Teaching team and office hours 
 
 | Team member | Office hours | Location |
 | ----------  | ----         | ---- |
-| [Professor Amy Herring](https://stat.duke.edu/people/amy-h-herring)  <a href="mailto:amy.herring@duke.edu" title="email"><i class="fa fa-envelope"></i></a> &nbsp;  | Wed and Thurs 1:30-2:30pm | 208 Old Chemistry |
-[TA Kelly Moran](https://www.krellinst.org/csgf/fellows/profile?n=moran2016)  <a href="mailto:kelly.moran@duke.edu" title="email"><i class="fa fa-envelope"></i></a> &nbsp; | Wed 6:00 - 8:00 pm ??? | 211A Old Chemistry??? Maybe at DGHI?
+| [Professor Amy Herring](https://stat.duke.edu/people/amy-h-herring)  <a href="mailto:amy.herring@duke.edu" title="email"><i class="fa fa-envelope"></i></a> &nbsp;  | Wed 10-11 and Fri 1:30-2:30 | 208 Old Chemistry |
+[TA Kelly Moran](https://www.krellinst.org/csgf/fellows/profile?n=moran2016)  <a href="mailto:kelly.moran@duke.edu" title="email"><i class="fa fa-envelope"></i></a> &nbsp; | TBD | TBD
 
 ### Materials
 
@@ -33,37 +33,37 @@ You should have access to a laptop and bring it to every class, fully charged. T
 
 
 ### Topics and Important Dates
-Note: this schedule is approximate and is likely to be modified as the course progresses
+GLHLTH 758 contains a mixture of lecture, lab, and combination sessions at the usual class times. Sessions marked "lab" will be taught by Kelly and involve hands-on analysis and/or consultation about case studies.
+
+Note: this schedule is approximate and is likely to be modified as the course progresses. Readiness assessments will be given without advance notice. Assignments are due at the beginning of class unless otherwise specified.
 
 |Date           |Topic                      |Deliverables     |
 | ----------    | -----------------         | --------------- |
-| August 29     | Welcome, Groups, and CS1: Birth Weight        | Regression warm-up (in class)        |
-| August 31     | CS1: Robust Regression    |                 |
-| September 5   | CS1: Modeling in Class | |
-| September 7   | CS1: Causal Inference | CS1 Interim Report: Model Development and Evaluation |
-| September 12  | CS2: Visualizing our World in Data | |
-| September 14  | CS2: Tableau | CS1 Final Report: Smoking and Birth Weight |
-| September 19  | CS2: Tableau | |
-| Septmeber 21  | CS3: Hierarchical Models: Birth Weight Disparities | |
-| September 26  | Group Presentations of CS2 | CS2 Final Report: Our World in Data |
-| Septmeber 28  | CS3: Multilevel Models: Time Trends | |
-| October 3     | CS3: Generalized Linear Mixed Effects Models | CS3 Interim Report: Infant Mortality Visualization| 
-| October 5     | CS3: Bayesian Hierarchical Models | Midsemester Grades Due (my deliverable)  & CS4 Evaluation Criteria |
-| October 10    | CS4: Election Forecasting | CS3 Interim Report: County-Specific Mortality by Group|
-| October 12    | CS4: Election Forecasting with "Mr. P" | |
-| October 17    | CS4: Who Votes in NC? | CS3 Final Report: Infant Mortality Trends |
-| October 19    | CS4: Election Modeling Workshop | |
-| October 24    | CS4: Presentations: Who Votes in NC? | CS4 Interim Report: Who Votes in NC? |
-| October 26    | Individual CS: Web Scraping | | 
-| October 31    | Individual CS: Web Scraping | | CS4 Interim Report: Election Prediction Models |
-| November 2    | Individual CS: Web Scraping Work in Groups | CS4 Final Report due by Midnight Nov 5|
-| November 7    | CS4: Presentations: Post Election Diagnostics | Individual CS Interim Report: Analysis Plan  |
-| November 9    | CS5: Missing Data: How to Survive | |
-| Movember 14   | CS5: Missing Data | |
-| November 16   | CS5: Missing Data | CS5 Interim Report: Patterns of Missing Data |
-| November 28   | CS Lab | Individual CS Draft Report | 
-| November 30   | Individual CS Q&A | CS5: Final Report |
-| December 5    | Individual Presentations | Individual Reports Due |
-| December 7    | Individual Presentations | Individual Reports Due |
+| August 29     | Welcome, Groups, and CS1: Healthy Babies      |       |
+| August 31     | CS1: R and Data Visualization    |                 |
+| September 5   | CS1: Data Wrangling and Visualization  | 1-page Proposals for Individual Case Studies |
+| September 7   | CS1: Hands on with R | |
+| September 12  | CS1: Tableau for Data Visualization | |
+| September 14  | CS1: Lab: Tableau | CS1 Topic and Plan |
+| September 19  | CS2: Models for Categorical Data | |
+| Septmeber 21  | CS2: Hands On: Modeling Birth Weight | |
+| September 26  | Group Presentations of CS1 | CS1 Final Report|
+| Septmeber 28  | CS2: Generalized Linear Models | |
+| October 3     | CS2: Statistical Power | CS2 Interim Report  | 
+| October 5     | CS2: Small Sample Methods |  |
+| October 10    | CS3: Hierarchical Models | |
+| October 12    | CS3: Lab: Hierarchical Models| CS2 Final Report |
+| October 17    | CS3: Hierarchical Models |  |
+| October 19    | CS3: Hands On: Hierarchical Models | Individual Case Study Interim Report |
+| October 24    | CS3: Hands On: Hierarchical Models | CS3 Interim Report  |
+| October 26    | CS4: Cross-Sectional vs. Longitudinal Data |  | 
+| October 31    | CS4: GLMM for Longitudinal Data |   |
+| November 2    | CS4: Generalized Estimating Equations | CS3 Final Report |
+| November 7    | CS4: Hands On: Longitudinal Data | Individual Case Study Presentations |
+| November 9    | CS4: Missing Data | Individual Case Study Presentations |
+| Movember 14   | CS4: Missing Data |Individual Case Study Presentations and CS4 Interim Report  |
+| November 16   | CS4: Hands On: Missing Data | Individual Case Study Presentations |
+| November 28   | CS4: Lab: CS4 Reports | Individual Case Study Final Report  | 
+| November 30   | CS4: Lab: CS4 Reports | CS4 Final Report (by 5pm)|
 
 
