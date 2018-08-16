@@ -1,0 +1,41 @@
+---
+title: "Individual Case Study"
+---
+
+```{r, echo=FALSE, include=FALSE}
+library(kableExtra)
+library(knitr)
+library(tidyverse)
+```
+
+
+# Learning Objectives
+
+- identify interesting hypotheses to evaluate in your own global health data
+- gain experience selecting appropriate statistical methods and writing an analysis plan that directly addresses your hypotheses
+
+# Case Study Goals
+
+- analyze data and interpret findings of your own study in global health
+- effectively communicate results of your analysis to your peers using compelling graphical displays and text
+
+
+
+# Data 
+
+You will supply your own data for this project. 
+
+
+
+
+# Reports 
+
+- A 1-page proposal is due September 5 at the beginning of class. This proposal must include an enumeration of hypotheses that you will address. You must clearly describe the data source, the date by which you will have access to the required data, and relevant data use restrictions/permissions.
+- An interim report (not to exceed 3 pages) is due at the beginning of class October 19. This report must clearly delineate planned analyses and graphical displays. Results may or may not be included, depending on student progress.
+- Presentations of final case studies will occur in class November 7, 9, 14, and 16
+- A 3 page (maximum) written report, along with accompanying graphics (maximum 1 Tableau dashboard and/or 3 page appendix of figures), is due at the beginning of class November 28
+
+
+
+
+

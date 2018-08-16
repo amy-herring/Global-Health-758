@@ -11,7 +11,7 @@
 
 
 
-<title></title>
+<title>Case Study 4: Longitudinal Data</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -172,7 +172,7 @@ $(document).ready(function ()  {
       ignoreSelector: ".toc-ignore",
       scrollTo: 0
     };
-    options.showAndHide = true;
+    options.showAndHide = false;
     options.smoothScroll = true;
 
     // tocify
@@ -235,6 +235,12 @@ div.tocify {
   border-radius: 0px;
 }
 
+.tocify-subheader {
+  display: inline;
+}
+.tocify-subheader .tocify-item {
+  font-size: 0.95em;
+}
 
 </style>
 
@@ -284,7 +290,7 @@ div.tocify {
   <a href="cs04.html">Case Study 4</a>
 </li>
 <li>
-  <a href="cs05.html">Individual Case Study</a>
+  <a href="cs_indiv.html">Individual Case Study</a>
 </li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
@@ -298,193 +304,35 @@ div.tocify {
 
 
 
+<h1 class="title toc-ignore">Case Study 4: Longitudinal Data</h1>
 
 </div>
 
 
-<div id="class-meetings" class="section level3">
-<h3>Class Meetings</h3>
-<p><font color="#6CA0DC"><i class="fas fa-university fa-lg"></i></font>   Trent 124</p>
-<p><font color="#6CA0DC"><i class="fas fa-calendar-alt fa-lg"></i></font>   WF 8:30-9:45am</p>
+<div id="learning-objectives" class="section level1">
+<h1>Learning Objectives</h1>
+<ul>
+<li>understand differences in inferences possible when using cross-sectional versus longitudinal data</li>
+<li>fit and interpret generalized linear mixed effects models for longitudinal data</li>
+<li>fit and interpret models fit using generalized estimating equations</li>
+<li>understand types of missing data, their potential consequences, and appropriate methods for handling missing data in a variety of settings</li>
+</ul>
 </div>
-<div id="teaching-team-and-office-hours" class="section level3">
-<h3>Teaching team and office hours</h3>
-<table>
-<thead>
-<tr class="header">
-<th>Team member</th>
-<th>Office hours</th>
-<th>Location</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><a href="https://stat.duke.edu/people/amy-h-herring">Professor Amy Herring</a> <a href="mailto:amy.herring@duke.edu" title="email"><i class="fa fa-envelope"></i></a>  </td>
-<td>Wed 10-11 and Fri 1:30-2:30</td>
-<td>208 Old Chemistry</td>
-</tr>
-<tr class="even">
-<td><a href="https://www.krellinst.org/csgf/fellows/profile?n=moran2016">TA Kelly Moran</a> <a href="mailto:kelly.moran@duke.edu" title="email"><i class="fa fa-envelope"></i></a>  </td>
-<td>TBD</td>
-<td>TBD</td>
-</tr>
-</tbody>
-</table>
+<div id="case-study-goals-coming-soon" class="section level1">
+<h1>Case Study Goals (coming soon)</h1>
 </div>
-<div id="materials" class="section level3">
-<h3>Materials</h3>
-<p>You should have access to a laptop and bring it to every class, fully charged. Texts and readings will be assigned as needed. Required software packages include R/RStudio (free) and Tableau (free for students).</p>
+<div id="data" class="section level1">
+<h1>Data</h1>
+<p>In this case study we consider a subset of data from the DGHI <a href="https://globalhealth.duke.edu/projects/share-child-pakistan">SHARE Child Project</a> in Pakistan. These data, which have been approved for class use only and should be kept confidential, are available on the Sakai website.</p>
 </div>
-<div id="topics-and-important-dates" class="section level3">
-<h3>Topics and Important Dates</h3>
-<p>GLHLTH 758 contains a mixture of lecture, lab, and combination sessions at the usual class times. Sessions marked “lab” will be taught by Kelly and involve hands-on analysis and/or consultation about case studies.</p>
-<p>Note: this schedule is approximate and is likely to be modified as the course progresses. Readiness assessments will be given without advance notice. Assignments are due at the beginning of class unless otherwise specified.</p>
-<table style="width:62%;">
-<colgroup>
-<col width="15%" />
-<col width="25%" />
-<col width="22%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th>Date</th>
-<th>Topic</th>
-<th>Deliverables</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>August 29</td>
-<td>Welcome, Groups, and CS1: Healthy Babies</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>August 31</td>
-<td>CS1: R and Data Visualization</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>September 5</td>
-<td>CS1: Data Wrangling and Visualization</td>
-<td>1-page Proposals for Individual Case Studies</td>
-</tr>
-<tr class="even">
-<td>September 7</td>
-<td>CS1: Hands on with R</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>September 12</td>
-<td>CS1: Tableau for Data Visualization</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>September 14</td>
-<td>CS1: Lab: Tableau</td>
-<td>CS1 Topic and Plan</td>
-</tr>
-<tr class="odd">
-<td>September 19</td>
-<td>CS2: Models for Categorical Data</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>Septmeber 21</td>
-<td>CS2: Hands On: Modeling Birth Weight</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>September 26</td>
-<td>Group Presentations of CS1</td>
-<td>CS1 Final Report</td>
-</tr>
-<tr class="even">
-<td>Septmeber 28</td>
-<td>CS2: Generalized Linear Models</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>October 3</td>
-<td>CS2: Statistical Power</td>
-<td>CS2 Interim Report</td>
-</tr>
-<tr class="even">
-<td>October 5</td>
-<td>CS2: Small Sample Methods</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>October 10</td>
-<td>CS3: Hierarchical Models</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>October 12</td>
-<td>CS3: Lab: Hierarchical Models</td>
-<td>CS2 Final Report</td>
-</tr>
-<tr class="odd">
-<td>October 17</td>
-<td>CS3: Hierarchical Models</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>October 19</td>
-<td>CS3: Hands On: Hierarchical Models</td>
-<td>Individual Case Study Interim Report</td>
-</tr>
-<tr class="odd">
-<td>October 24</td>
-<td>CS3: Hands On: Hierarchical Models</td>
-<td>CS3 Interim Report</td>
-</tr>
-<tr class="even">
-<td>October 26</td>
-<td>CS4: Cross-Sectional vs. Longitudinal Data</td>
-<td></td>
-</tr>
-<tr class="odd">
-<td>October 31</td>
-<td>CS4: GLMM for Longitudinal Data</td>
-<td></td>
-</tr>
-<tr class="even">
-<td>November 2</td>
-<td>CS4: Generalized Estimating Equations</td>
-<td>CS3 Final Report</td>
-</tr>
-<tr class="odd">
-<td>November 7</td>
-<td>CS4: Hands On: Longitudinal Data</td>
-<td>Individual Case Study Presentations</td>
-</tr>
-<tr class="even">
-<td>November 9</td>
-<td>CS4: Missing Data</td>
-<td>Individual Case Study Presentations</td>
-</tr>
-<tr class="odd">
-<td>Movember 14</td>
-<td>CS4: Missing Data</td>
-<td>Individual Case Study Presentations and CS4 Interim Report</td>
-</tr>
-<tr class="even">
-<td>November 16</td>
-<td>CS4: Hands On: Missing Data</td>
-<td>Individual Case Study Presentations</td>
-</tr>
-<tr class="odd">
-<td>November 28</td>
-<td>CS4: Lab: CS4 Reports</td>
-<td>Individual Case Study Final Report</td>
-</tr>
-<tr class="even">
-<td>November 30</td>
-<td>CS4: Lab: CS4 Reports</td>
-<td>CS4 Final Report (by 5pm)</td>
-</tr>
-</tbody>
-</table>
+<div id="resources-coming-soon" class="section level1">
+<h1>Resources (coming soon)</h1>
+</div>
+<div id="reports-coming-soon" class="section level1">
+<h1>Reports (coming soon)</h1>
+</div>
+<div id="slides-coming-soon" class="section level1">
+<h1>Slides (coming soon)</h1>
 </div>
 
 

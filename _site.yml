@@ -19,7 +19,7 @@ navbar:
   - text: Case Study 4
     href: cs04.html
   - text: Individual Case Study
-    href: cs_indiv.html
+    href: cs05.html
 output:
   html_document:
     theme: yeti

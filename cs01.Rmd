@@ -1,5 +1,5 @@
 ---
-title: "Case Study 1: Healthy Babies"
+title: "Case Study 1: Data Visualization"
 ---
 
 ```{r, echo=FALSE, include=FALSE}

@@ -1,0 +1,41 @@
+---
+title: "Case Study 4: Longitudinal Data"
+---
+
+```{r, echo=FALSE, include=FALSE}
+library(kableExtra)
+library(knitr)
+library(tidyverse)
+```
+
+
+# Learning Objectives
+
+- understand differences in inferences possible when using cross-sectional versus longitudinal data
+- fit and interpret generalized linear mixed effects models for longitudinal data
+- fit and interpret models fit using generalized estimating equations
+- understand types of missing data, their potential consequences, and appropriate methods for handling missing data in a variety of settings
+
+
+# Case Study Goals (coming soon)
+
+
+
+
+# Data 
+
+In this case study we consider a subset of data from the DGHI [SHARE Child Project](https://globalhealth.duke.edu/projects/share-child-pakistan) in Pakistan. These data, which have been approved for class use only and should be kept confidential, are available on the Sakai website.
+
+
+# Resources (coming soon)
+
+
+
+
+# Reports (coming soon)
+
+
+
+# Slides (coming soon)
+
+

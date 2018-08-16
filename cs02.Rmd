@@ -1,5 +1,5 @@
 ---
-title: "Case Study 1: Healthy Babies"
+title: "Case Study 2: Small Samples"
 ---
 
 ```{r, echo=FALSE, include=FALSE}
@@ -11,59 +11,29 @@ library(tidyverse)
 
 # Learning Objectives
 
-- gain programming skills in RStudio
-- gain skills in data wrangling techniques, including combining data across a variety of sources and formats, data harmonization, and creation of new variables
-- create effective visual displays of complex information using R and Tableau
-- create interactive visual presentations using Tableau
+- define and identify "small sample" situations in a variety of contexts
+- understand situations in which standard statistical methods may not be appropriate for small sample data
+- gain skills to select and apply a variety of small sample statistical methods for analysis
+- gain skills to understand consequences of small samples at the design stage of a project
 
 
-# Case Study Goals
-
-Using global health data from the World Bank, CIA Factbook, or a complex data source of your own choosing, 
-
-- produce compelling R graphics communicating an aspect of our world in data
-- create a Tableau dashboard interactive visual presentation to illustrate an aspect of our world in data
-- communicate your graphical findings in a dynamic class presentation
-
-# Data 
-
-- North Carolina Birth Records: these data cannot be shared beyond class participants. Please see Sakai for the data and related documentation, and do not disseminate the data any further.
-- Worldwide country-level data on maternal and infant outcomes: publicly available (data files coming soon)
-
-<!-- 
-  Tutorial Data Set
-- [popDF.RData](data/popDF.RData)
-- [infMortDF.RData](data/infMortDF.RData)
-- [codeMapDF.RData](data/codeMapDF.RData)
-- [countries.csv](data/countries.csv)
-
-Full People And Society Data Set:
-- [full.RData](data/full.RData)
-
-How To Obtain Data from Factbook:
-- [Factbook Tutorial](data/data_file_2014.html)
--->
+# Case Study Goals (coming soon)
 
 
-# Resources
 
-This case study draws on materials developed in Chapter 11 of Data Science in R: A Case Studies Approach to Computational Reasoning and Problem Solving by Nolan and Temple Lang (free e-book through Duke Libraries)
-
-
-# Reports
-
-- Interim report: outline the general story you wish to tell graphically. Data sources and variables to be used in the data visualizations, along with short descriptions (e.g., captions) for planned visualizations, should also be included. Maximum of 3 pages.
-
-- Final report:  in-class presentation (5 minutes), R/Tableau visualizations, and a two-page document that clearly references data sources, provides a rationale for the data chosen to tell the story, and summarizes the story told in the graphics.
+# Data (coming soon)
 
 
-# Slides (coming soon!)
+# Resources 
 
-<!-- 
-#[Initial description of case study](decks/cs01_1_deck.html)
+- [R Code for Some Nonparametric Tests](https://www.statmethods.net/stats/nonparametric.html)
+- [Exact Logistic Regression in R](https://stats.idre.ucla.edu/r/dae/exact-logistic-regression/)
 
-#[Birth weight](decks/cs01_2_deck.html)
 
-#[Mapping infant mortality](decks/cs01_3_deck.html)
--->
+# Reports (coming soon)
+
+
+
+# Slides (coming soon)
+
 
