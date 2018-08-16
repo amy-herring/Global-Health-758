@@ -12,6 +12,7 @@ description: "Application of statistical and data science skills to in-depth dat
 markup: "mmark"
 ---
 
+#Welcome to Case Studies in Global Health!
 
 ### Class Meetings
 
@@ -20,7 +21,7 @@ markup: "mmark"
 <font color="#6CA0DC"><i class="fas fa-calendar-alt fa-lg"></i></font> &nbsp; WF 8:30-9:45am
 
 
-### Teaching team and office hours 
+### Teaching Team and Office Hours 
 
 | Team member | Office hours | Location |
 | ----------  | ----         | ---- |
