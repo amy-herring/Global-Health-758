@@ -57,16 +57,9 @@ This case study draws on materials developed in Chapter 11 of Data Science in R:
 - Final report:  in-class presentation (5 minutes), R/Tableau visualizations, and a two-page document that clearly references data sources, provides a rationale for the data chosen to tell the story, and summarizes the story told in the graphics.
 
 
-# Slides 
+# Slides (coming soon!)
 
  
-[Birth weight data](decks/cs01_1_deck.html)
-
-[Visualization in R](decks/cs01_2_deck.html)
-
-[Least Squares and Robust Regression](decks/cs01_3_deck.html)
-
-[Introduction to Causal Inference](decks/cs01_4_deck.html)
 <!--
 #[Mapping infant mortality](decks/cs01_3_deck.html)
 -->
