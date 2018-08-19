@@ -60,10 +60,14 @@ This case study draws on materials developed in Chapter 11 of Data Science in R:
 # Slides 
 
  
-[Birthweight data](decks/cs01_1_deck.html)
-<!--
-#[Birth weight](decks/cs01_2_deck.html)
+[Birth weight data](decks/cs01_1_deck.html)
 
+[Visualization in R](decks/cs01_2_deck.html)
+
+[Least Squares and Robust Regression](decks/cs01_3_deck.html)
+
+[Introduction to Causal Inference](decks/cs01_4_deck.html)
+<!--
 #[Mapping infant mortality](decks/cs01_3_deck.html)
 -->
 

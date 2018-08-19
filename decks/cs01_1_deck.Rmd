@@ -1,5 +1,5 @@
 ---
-title: Birthweight
+title: Birth Weight
 output: 
   revealjs::revealjs_presentation:
     theme: night
@@ -16,28 +16,28 @@ output:
 ---
 
 
-## Birthweight
+## Birth weight
 
-Birthweight is a commonly-used indicator of a newborn infant's health status. Because this indicator is easily obtained, it is a critical component of population health reporting by the World Health Organization and governments around the globe. The distribution of birthweight has often been described as approximately normal, though the left tail in particular is inflated relative to that from a Gaussian distribution.
+Birth weight is a commonly-used indicator of a newborn infant's health status. Because this indicator is easily obtained, it is a critical component of population health reporting by the World Health Organization and governments around the globe. The distribution of birth weight has often been described as approximately normal, though the left tail in particular is inflated relative to that from a Gaussian distribution.
 
-## Distribution of birthweight
+## Distribution of birt hweight
 
-![Distribution of birthweights for 405,676 live and still births, Norway, 1992–1998, from Wilcox, 2001 IJE](figures/wilcox.jpg)
+![Distribution of birth weights for 405,676 live and still births, Norway, 1992–1998, from Wilcox, 2001 IJE](figures/wilcox.jpg)
 
 
-## Variability in birthweight
+## Variability in birth weight
 
-Much of the variability in birthweight is explained by gestational age at delivery. A baby typically spends around 38 weeks in the uterus, but the average length of gestation is counted at 40 weeks. Pregnancy is counted from the last day of a woman's menstrual period (which is easily measured), but the date of conception (not so easy to measure) is typically around two weeks later.
+Much of the variability in birth weight is explained by gestational age at delivery. A baby typically spends around 38 weeks in the uterus, but the average length of gestation is counted at 40 weeks. Pregnancy is counted from the last day of a woman's menstrual period (which is easily measured), but the date of conception (not so easy to measure) is typically around two weeks later.
 
-## Birthweight as a function of gestational age
+## Birth weight as a function of gestational age
 
-![Mean birthweight for gestational age (+/- SD) from Talge et al., 2014 Pediatrics](figures/gabwt.jpg){width=70%}
+![Mean birth weight for gestational age (+/- SD) from Talge et al., 2014 Pediatrics](figures/gabwt.jpg){width=70%}
 
 ## Case Study Data
 
-You will visualize data on birthweight and gestational age at delivery for babies born in North Carolina from 2011-2016. Relevant variables include the following.
+You will visualize data on birth weight and gestational age at delivery for babies born in North Carolina from 2011-2016. Relevant variables include the following.
 
-- Birthweight in g (primary outcome variable)
+- Birth weight in g (primary outcome variable)
 - Gestational age in weeks (babies should gain weight until delivery)
 - Biological sex assigned at birth (boys are heavier on average)
 
@@ -49,7 +49,7 @@ You will visualize data on birthweight and gestational age at delivery for babie
 
 ## Case Study Data
 
-- Maternal smoking (smoking is associated with lower birthweight; pregnant women are encouraged to quit smoking)
+- Maternal smoking (smoking is associated with lower birth weight; pregnant women are encouraged to quit smoking)
 - Maternal age (be sure to explore nonlinear trends, as very young mothers and older mothers are often at higher risk)
 - Maternal race (health disparities in birth weight have been identified in the literature, though mechanisms are largely unknown)
 - Hispanic origin of mother
@@ -58,7 +58,7 @@ You will visualize data on birthweight and gestational age at delivery for babie
 
 ## Goals
 
-- data exploration by visually characterizing the relationship between each factor and birthweight
+- data exploration by visually characterizing the relationship between each factor and birth weight
 
 
 
