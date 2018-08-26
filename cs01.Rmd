@@ -63,8 +63,12 @@ This case study draws on materials developed in Chapter 11 of Data Science in R:
 # Slides 
 
 [Healthy babies](decks/cs01_1_deck.html)
+
 [Data visualization in R](decks/cs01_2_deck.html) 
+
 [Mapping in R](decks/cs01_3_deck.html)
+
 [Introduction to Tableau](decks/cs01_4_deck.html)
+
 [Creating a Tableau Dashboard](decks/cs01_5_deck.html)
 
