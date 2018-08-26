@@ -26,7 +26,8 @@ library(tidyverse)
 
 
 # Resources 
-
+- [Linear Regression in R](http://r-statistics.co/Linear-Regression.html)
+- [Logistic Regression in R](https://stats.idre.ucla.edu/r/dae/logit-regression/)
 - [R Code for Some Nonparametric Tests](https://www.statmethods.net/stats/nonparametric.html)
 <!---
 - [Exact Logistic Regression in R](https://stats.idre.ucla.edu/r/dae/exact-logistic-regression/)
