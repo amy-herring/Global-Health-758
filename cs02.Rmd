@@ -22,7 +22,9 @@ library(tidyverse)
 
 
 
-# Data (coming soon)
+# Data 
+
+We'll use the North Carolina birth weight data on Sakai for this assignment.
 
 
 # Resources 
