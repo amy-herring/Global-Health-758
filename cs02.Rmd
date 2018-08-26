@@ -1,5 +1,5 @@
 ---
-title: "Case Study 2: Small Samples"
+title: "Case Study 2: Modeling"
 ---
 
 ```{r, echo=FALSE, include=FALSE}
@@ -11,8 +11,9 @@ library(tidyverse)
 
 # Learning Objectives
 
+- understand fitting and interpretation of general linear models
+- understand situations in which standard models and methods may be inappropriate
 - define and identify "small sample" situations in a variety of contexts
-- understand situations in which standard statistical methods may not be appropriate for small sample data
 - gain skills to select and apply a variety of small sample statistical methods for analysis
 - gain skills to understand consequences of small samples at the design stage of a project
 
@@ -27,7 +28,9 @@ library(tidyverse)
 # Resources 
 
 - [R Code for Some Nonparametric Tests](https://www.statmethods.net/stats/nonparametric.html)
+<!---
 - [Exact Logistic Regression in R](https://stats.idre.ucla.edu/r/dae/exact-logistic-regression/)
+--->
 
 
 # Reports (coming soon)
