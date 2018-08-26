@@ -15,18 +15,19 @@ output:
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
+library(countrycode)
 ```
 
-## CIA Factbook Data
+## Case Study 2: Data Visualization
 
 Using data relevant to countries around the world, we will explore data science tools to tell complex stories through data visualization. We will consider data on infant mortality in class, and for the report you are welcome to use any data that can be plotted by country.
 
 
 
-## Additional Case Study Data
+## Case Study Data
 
 - Information for plotting data by country: http://dev.maxmind.com/static/csv/codes/country_latlon.csv 
-- CIA Factbook Data: https://www.cia.gov/library/publications/download/ 
+- CIA Factbook Data: https://www.cia.gov/library/publications/download/
 - World Bank Data: https://data.worldbank.org 
 - Our World in Data: https://ourworldindata.org 
 - Data of your own choosing on world issues
@@ -34,8 +35,8 @@ Using data relevant to countries around the world, we will explore data science 
 ## Case Study Goals
 
 Using data from the World Bank or a complex data source of your own choosing, 
-
-- create a Tableau dashboard interactive visual presentation of our world in data
+- create an R visualization to illustrate an aspect of our world in data
+- create an accompanying Tableau dashboard interactive visual presentation of our world in data
 - explain your figures to class in an oral presentation by the group
 
 ## Case for Class: Infant Mortality
@@ -54,7 +55,7 @@ While overall infant mortality rates in the US have declined over time, major di
 
 ## Infant Mortality Worldwide
 
-[Worldmapper](http://archive.worldmapper.org/display.php?selected=261) created a visualization of infant mortality worldwide in 2002, rescaling each country by its contribution to infant deaths worldwide. 
+Worldmapper http://archive.worldmapper.org/display.php?selected=261 created a visualization of infant mortality worldwide in 2002, rescaling each country by its contribution to infant deaths worldwide. 
 
 ![2002 Contributions to Worldwide Infant Mortality](figures/mort_scale.png) 
 
@@ -72,14 +73,38 @@ First, we will obtain latitude and longitude information for the center of each 
 
 ```{r readlatlong}
 latlonDF <-read.csv("http://dev.maxmind.com/static/csv/codes/country_latlon.csv")
+head(latlonDF)
+```
+Hmm, it would be nice to have a crosswalk between the 2-letter code in iso.3166.country and the country name.
+
+## R Can Do That!
+
+R has a nifty package, `countrycode`, that contains a crosswalk between many identification and coding schemes for countries (e.g., English name, German name, World Bank, International Olympic Committee, Food and Agricultural Organization of the UN, International Monetary Fund, ISO-2, ISO-3). We can use it to attach the names to our ISO 3166 2-digit codes.
+
+First, we install the library.
+
+```{r countrycode, eval=FALSE}
+install.packages("countrycode"")
+library(countrycode)
 ```
 
+##  Country Name Variable
+Now we create the country name variable.
+```{r countryvar}
+latlonDF$country=countrycode(latlonDF$iso.3166.country,"iso2c","country.name")
+```
+
+## What's the Warning?
+
+Three codes did not match:  AN, AP, \& EU. Looking at the ISO 3166 codes online, we see these codes are not currently in use, though they were contained in our latitude/longitude file. For now we will ignore them.
+
+
 ## Population & Infant Mortality Data
-The data files for population and infant mortality in 2014 are available on the course website. For those of you interested in how to extract this information from the CIA factbook - see the tutorial on the course website. (Hint, hint: you may want to extract 2017 data soon!)
+The data files for population and infant mortality in 2017 are available on the course website. For those of you interested in how to extract this information from the CIA factbook - see the tutorial on the course website. 
 
 ```{r loadpopmort}
-load("data/popDF.RData")
-load("data/infMortDF.RData")
+load("~/Documents/GitHub/Global-Health-758/decks/data/pop_data.RData")
+load("~/Documents/GitHub/Global-Health-758/decks/data/IM_data.RData")
 ```
 
 
@@ -88,7 +113,7 @@ load("data/infMortDF.RData")
 First we'll combine the demographic data on infant mortality and population size because these come from the same source and consequently should have fewer problems with matching. 
 
 ```{r mergepopmort}
-IMPop = merge(infMortDF, popDF, by = "ctry", all = FALSE)
+IMPop = merge(IM_data, pop_data, by = "country", all = FALSE)
 ```
 
 
@@ -98,24 +123,35 @@ In the merge of infMortDF and popDF, some rows were excluded from the resulting 
 
 Check to see if all countries in the infant mortality dataset are also in the population size dataset:
 ```{r mortinpop}
-which((!infMortDF$ctry %in% popDF$ctry))
+IM_data$country[which((!IM_data$country %in% pop_data$country))]
 ```
 
 ## Missed Merges
 
 Which countries are in the population data set but not the infant mortality data set?
 ```{r popinmort}
-popDF$ctry[which((!popDF$ctry %in% infMortDF$ctry))]
+pop_data$country[which((!pop_data$country %in% IM_data$country))]
 ```
-<small>Appendix D of the CIA World Factbook contains country codes: AX (Akrotiri, a special UK overseas territory near Cyprus), KT (Christmas Island), CK (Cocos/Keeling Islands), UC (Curacao), DX (Dhekelia, see AX), FK (Falkland Islands), VT (Vatican City) , KV (Kosovo), MJ (Montenegro), NE (Niue), NF (Norfolk Island), PC (Pitcairn Islands), TB (St. Barthelemy), RN (St. Martin), SV (Svalbard), TL (Tokelau)</small>
 
 ## Merging the geographic and demographic data sets
 
 ```{r mergegeodemo}
-latlonDF$code <- latlonDF$iso.3166.country
-allCtryData = merge(IMPop, latlonDF, by.x = "ctry", by.y = "code", all = FALSE)
+allCtryData = merge(IMPop, latlonDF, by="country", all = FALSE)
 ```
 
+## Missed Merges
+
+Which countries are in the spatial data but not the Factbook data?
+```{r inspatialnotfact}
+latlonDF$country[which((!latlonDF$country %in% IMPop$country))]
+```
+
+## Missed Merges
+
+Which countries are in the Factbook data set but not the spatial data set?
+```{r infactnotspatial}
+IMPop$country[which((!IMPop$country %in% latlonDF$country))]
+```
 
 
 ## Initial Plot - The Colors
@@ -159,27 +195,25 @@ InfMortDiscrete = cut(allCtryData$infMort,
 summary(InfMortDiscrete)
 ```
 
-## Affected Lives
+## Communicating Affected Lives
 
 The infant mortality rate is not the only factor in decision-making. We are more likely to intervene when more lives are at risk. Let's examine population size.
 
-
-```{r pophist, out.width='40%'}
+```{r pophist, out.width='55%'}
 hist(allCtryData$pop, breaks = 20, main = "",
      xlab = "Population Size")
 ```
-
-Large variance -- let's try a scale transformation.
+There's a high variance!  Let's try scaling by taking the square root.
 
 
 ## Population Size
 
-```{r pophistsqrt, out.width='40%'}
+```{r pophistsqrt, out.width='55%'}
 hist(sqrt(allCtryData$pop), breaks = 20, main = "",
      xlab = "sqrt(Population Size)")
 ```
 
-That's much better. We'll work with some function of square root of population size (further scalng to be sure the radius of each point is not too large for our plot).
+That's much better. We'll work with some transformation of square root of population size (further scalng to be sure the radius of each point is not too large for our plot).
 
 ## Initial Plot 
 Now we are ready to plot the mortality rates around the world. Size of the points will be a function of population size, while color will be a function of the mortality rate (darker=higher).
@@ -284,8 +318,6 @@ load("data/codeMapDF.RData")
 latlonCtry = merge(latlonDF, codeMapDF, by.x = "code", by.y = "iso", all = FALSE)
 IMpopCtry = merge(IMPop, codeMapDF, by.x="ctry", by.y = "cia", all=FALSE)
 allCtryData <- merge(latlonCtry, IMpopCtry, by="name")
-names(allCtryData)[1] <- "Country"
-save(allCtryData, file="data/allCtryData.RData") # save for Tableau tutorial
 
 # Check Data
 allCtryData[allCtryData$ctry %in% c("CH", "SZ", "GB", "UK", "NU","NI","RI","RS"), 
@@ -349,5 +381,6 @@ symbols(allCtryData$longitude, allCtryData$latitude, add = TRUE,
 legend(x = -150, y = 0, title = "Infant Mortality",
        legend = levels(InfMortDiscrete), fill = cols, cex = 0.8)
 ```
+
 
 

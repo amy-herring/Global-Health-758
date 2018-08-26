@@ -1,0 +1,46 @@
+---
+  title: "Group dynamics"
+---
+  
+```{r, echo=FALSE, include=FALSE}
+library(kableExtra)
+library(knitr)
+library(tidyverse)
+```
+
+### Policies
+
+Your group has a number of responsibilities for problem and project assignments, described below.
+
+- Designate a coordinator, recorder, monitor, reproducibility checker, and reviewer for each assignment. These should vary so that each group member takes each role on an assignment. For 4-person teams, combine the roles of reviewer and monitor.
+- Agree on meeting times in advance and on what each member should have complete before the meetings (readings, initial analysis, coding, etc.).
+- Do the required individual preparation.
+- Coordinator sends reminder before meeting that includes meeting location, time, and individual preparation assignments
+- Meet and work. Coordinator keeps everyone on task and makes sure everyone is involved, recorder prepares final solution to be turned in, monitor makes sure everyone understands the solution, including the coding, the checker double-checks the work for reproducibility (and errors!), and the reviewer is responsible for (1) sharing comments on the graded project (and interim submissions) with the team (2) leading a discussion about them, with a focus on how to improve moving forward, and (3) reviewing Spliddit effort apportionment scores in a constructive conversation with the team.
+- Checker turns in assignment, which also indicates which student took on each role in the first bullet point.
+- All team members complete evaluations on [Spliddit](http://www.spliddit.org). On Spliddit, you will use sliders to indicate the relative contributions of each of your peers (credit is out of 100%). Your ratings should reflect the percentage of the total project that each individual is responsible for, not taking your own contributions into account. Spliddit will then apportion credit using fair division principles (you can read more about it on the website).
+- Reviewer coordinates review of returned assignments.
+
+### Team expectations agreement
+
+On a single sheet of paper, list the names of all group members along with a list of expectations the team wishes to adopt.  Suggestions are below, but you can add or subtract any items as needed. Each member should sign the sheet and turn it in on class September 5.
+
+Potential expectations include the following (not an exhaustive list!):
+
+- Make a serious effort at assigned work before meetings
+- Make sure anyone who misses a meeting for a good cause gets caught up on progress
+- Attend meetings
+- Show up on time and stay for full meeting
+- Notify project coordinator as soon as possible if unable to attend a meeting or fulfill a responsibility
+- Listen thoughtfully to all team members
+- Follow up promptly on assigned tasks
+- Complete high quality work
+- Discuss team-related issues frankly and honestly with the group
+- Occasionally bring cookies or donuts to meetings
+- Never bring smelly food to meetings
+- Skype into meetings if you are sick
+- You get the picture!
+
+
+
+<tiny> Group policies adapted from Felder and Brent, 2000 </tiny>

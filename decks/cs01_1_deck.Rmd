@@ -1,5 +1,5 @@
 ---
-title: Birth Weight
+title: Healthy Babies, Healthy Societies
 output: 
   revealjs::revealjs_presentation:
     theme: night
@@ -20,7 +20,7 @@ output:
 
 Birth weight is a commonly-used indicator of a newborn infant's health status. Because this indicator is easily obtained, it is a critical component of population health reporting by the World Health Organization and governments around the globe. The distribution of birth weight has often been described as approximately normal, though the left tail in particular is inflated relative to that from a Gaussian distribution.
 
-## Distribution of birt hweight
+## Distribution of birth weight
 
 ![Distribution of birth weights for 405,676 live and still births, Norway, 1992–1998, from Wilcox, 2001 IJE](figures/wilcox.jpg)
 
@@ -35,7 +35,7 @@ Much of the variability in birth weight is explained by gestational age at deliv
 
 ## Case Study Data
 
-You will visualize data on birth weight and gestational age at delivery for babies born in North Carolina from 2011-2016. Relevant variables include the following.
+You will visualize data on birth weight and gestational age at delivery for babies born in North Carolina from 2011-2016. The source of these data is the North Carolina State Center for Health Statistics. Relevant variables include the following.
 
 - Birth weight in g (primary outcome variable)
 - Gestational age in weeks (babies should gain weight until delivery)
@@ -56,9 +56,21 @@ You will visualize data on birth weight and gestational age at delivery for babi
 - Year of birth (useful to determine if there are any time trends)
 - County of residence (very rough proxy for socio-economic status)
 
+## Data Source: CIA Factbook
+
+The CIA World Factbook is a reference resource produced by the US Central Intelligence Agency. It is available online and updated (in part) weekly. Topics covered by this almanac include demographics, geography, communications, government, economy and military.
+
+While convenient, the Factbook is not error-free and does not cite its sources, leading to some difficulty verifying figures. For example, demographic statistics describing Albania as 70\% Muslim, 20\% Eastern Orthodox, and 10\% Roman Catholic were based on a 1939 survey and only recently updated. Similarly, the fertility rate of 0.78 children/woman reported for Singapore is at odds with other recent figures.
+
+## Infant Mortality
+
+*Infant mortality*, the death of an infant before the first birthday, provides key information about overall health of a society. The *infant mortality rate* is typically presented as the number of deaths per 1000 births. 
+
 ## Goals
 
-- data exploration by visually characterizing the relationship between each factor and birth weight
+- explore health data, visually characterizing the relationship between each factor and birth weight
+- explore infant mortality worldwide, creating informative visual displays describing the infant mortality burden around the world
+
 
 
 

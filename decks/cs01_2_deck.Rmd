@@ -140,7 +140,7 @@ ggplot(data = [dataset], mapping = aes(x = [x-variable], y = [y-variable])) +
 ## Exploring Birth Weight Distribution 
 
   
-```{r histogram, out.width = '70%', echo=FALSE }
+```{r histogram, out.width = '70%' }
 ggplot(data = birth_data, mapping = aes(x = BWTG)) +
   geom_histogram(binwidth = 200) + xlab("Birth weight (g)") 
 ```

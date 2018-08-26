@@ -1,0 +1,10 @@
+---
+title: "How To Obtain Tableau"
+output: html_document
+---
+
+### Step 1: Duke Access
+Go to https://tableau.duke.edu/getting/index.php, and click on “I am a full-time Duke student or instructor” then a paragraph should drop down and click on the “free 1-year license” link.
+
+### Step 2: Tableau Online
+Scroll down to section labeled Students and click “Learn More”. Then click “Get Tableau For Free”. Fill out information and follow remaining instructions - you should get an email with a license number and installation instructions.

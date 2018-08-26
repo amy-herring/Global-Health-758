@@ -53,7 +53,7 @@ If you miss class or would like to review the material covered in class, you can
 On the first day of class, we will develop teams of around 6 students - these teams will stay consistent 
 throughout the semester (barring extraordinary circumstances). You will work in these teams during 
 class and on the group case studies. The process of forming teams will be completely transparent 
-and based on self-reported data.
+and based on self-reported data. Please follow the [Team Policies](grouppolicies.html) for group work.
 
 #### Case Studies:
 

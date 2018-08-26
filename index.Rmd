@@ -46,7 +46,7 @@ Note: this schedule is approximate and is likely to be modified as the course pr
 | September 7   | CS1: Hands on with R | |
 | September 12  | CS1: Tableau for Data Visualization | |
 | September 14  | CS1: Lab: Tableau | CS1 Topic and Plan |
-| September 19  | CS2: Models for Categorical Data | |
+| September 19  | CS2: Modeling | |
 | Septmeber 21  | CS2: Hands On: Modeling Birth Weight | |
 | September 26  | Group Presentations of CS1 | CS1 Final Report|
 | Septmeber 28  | CS2: Generalized Linear Models | |
