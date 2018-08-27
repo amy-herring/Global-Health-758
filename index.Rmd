@@ -25,8 +25,8 @@ markup: "mmark"
 
 | Team member | Office hours | Location |
 | ----------  | ----         | ---- |
-| [Professor Amy Herring](https://stat.duke.edu/people/amy-h-herring)  <a href="mailto:amy.herring@duke.edu" title="email"><i class="fa fa-envelope"></i></a> &nbsp;  | Wed 10-11 and Fri 1:30-2:30 | 208 Old Chemistry |
-[TA Kelly Moran](https://www.krellinst.org/csgf/fellows/profile?n=moran2016)  <a href="mailto:kelly.moran@duke.edu" title="email"><i class="fa fa-envelope"></i></a> &nbsp; | TBD | TBD
+| [Professor Amy Herring](https://stat.duke.edu/people/amy-h-herring)  <a href="mailto:amy.herring@duke.edu" title="email"><i class="fa fa-envelope"></i></a> &nbsp;  | Wednesday and Thursday 1:30-2:30pm | 208 Old Chemistry |
+[TA Kelly Moran](https://www.krellinst.org/csgf/fellows/profile?n=moran2016)  <a href="mailto:kelly.moran@duke.edu" title="email"><i class="fa fa-envelope"></i></a> &nbsp; | Monday 11:45am-12:45pm and Wednesday 7:15-8:15am | Lounge by Trent 040
 
 ### Materials
 
