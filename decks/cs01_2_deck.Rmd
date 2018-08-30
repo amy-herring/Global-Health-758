@@ -273,4 +273,26 @@ ggplot(data = birth_data, mapping = aes(x = MRACER, fill = MHISP)) +
 ```
 
 
+## In-class activities
+
+- Subset data to 2016 births in Durham county
+
+```{r durham, eval=FALSE}
+birth2016=subset(birth_data,birth_data$YOB=='2016')
+#CORES code for Durham Co is 32
+durhamb16=subset(birth2016,birth2016$CORES=='32')
+```
+
+- Create a scatterplot of the Durham data with birth weight on the y-axis and gestational age on the x-axis. Adapt the plot by exploring [options in the geom_point() call](https://ggplot2.tidyverse.org/reference/geom_point.html).  For example, you can try the following.
+```{r ggpoint, eval=FALSE}
++geom_point(color='blue') #try other colors!
++geom_point(alpha=1/2) # try fractions down to 1/10 -- helpful?
++ geom_point(shape=3) #try options!
++ geom_point(size=2) #try options - fractions too
+```
+Explore various combinations to improve this graphic, also recalling the Weight by age by gender slide (with the color option in the mapping argument).
+
+  
+- Explore box plots of birth weight by race and Hispanic ethnicity in Durham
+
 
