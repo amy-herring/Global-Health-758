@@ -95,6 +95,7 @@ The grade for each group case study submission will be based on two components: 
 Example:  Suppose a submission is worth 100 points, and the team has 5 members. If group k's score $s_k=90$, and all 5 team members contribute equally (20\% of the work each), then 450 points are available for allocation, and each team member receives 450/5=90 points for the submission.  If the contributions of the team members are (35\%, 30\%, 20\%, 10\%, 5\%), then their respective grades are 157.5, 135, 90, 45, and 22.5 (i.e., 7 times the work yields 7 times the points).
 
 The total number of group project points over the course of the semester for team $k$ is $T_k=N_k\sum_{i=1}^5 s_{ik}$, and the maximum number of points that will be awarded to any team member in total for group projects is 500. This ensures (1) team members are able to adjust their effort levels on projects according to their interests and other time commitments, (2) teams are encouraged to ensure contributions over the course of the semester are balanced across team members, and (3) individuals who do not make strong contributions to the team will receive clear feedback regarding the need for adjustments to their efforts. 
+
 ### Excused Absences:
 
 Students who miss a class due to a religious holiday or short-term illness should let me know as soon as possible. Note that these excused absences do not excuse you from assigned case studies; it is your responsibility to make alternative arrangements with your team to participate.
