@@ -42,7 +42,7 @@ Note: this schedule is approximate and is likely to be modified as the course pr
 | ----------    | -----------------         | --------------- |
 | August 29     | Welcome, Groups, and CS1: Healthy Babies      |       |
 | August 31     | CS1: R and Data Visualization    |                 |
-| September 5   | CS1: Hands on with R  | 1-page Proposals for Individual Case Studies |
+| September 5   | CS1: Hands on with R  | 1-page Proposals for Individual Case Studies & Group Expectations Documents Signed |
 | September 7   | CS1: Data Wrangling and Visualization | |
 | September 12  | CS1: Tableau for Data Visualization | |
 | September 14  | CS1: Lab: Tableau | CS1 Topic and Plan |

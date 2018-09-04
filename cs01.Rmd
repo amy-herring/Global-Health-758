@@ -66,6 +66,8 @@ This case study draws on materials developed in Chapter 11 of Data Science in R:
 
 [Data visualization in R](decks/cs01_2_deck.html) 
 
+[R code for September 5](decks/sept5tutorial.html)
+
 [Mapping in R](decks/cs01_3_deck.html)
 
 [Introduction to Tableau](decks/cs01_4_deck.html)
