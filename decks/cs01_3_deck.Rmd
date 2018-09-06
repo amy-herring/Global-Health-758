@@ -75,7 +75,7 @@ latlonDF <-read.csv("http://dev.maxmind.com/static/csv/codes/country_latlon.csv"
 ```
 
 ## Population & Infant Mortality Data
-The data files for population and infant mortality in 2014 are available on the course website. For those of you interested in how to extract this information from the CIA factbook - see the tutorial on the course website. (Hint, hint: you may want to extract 2017 data soon!)
+The data files for population and infant mortality in 2014 are available on the course website. 
 
 ```{r loadpopmort}
 load("data/popDF.RData")
@@ -143,7 +143,7 @@ We want our colors to be more evenly distributed than they are based on the defa
 quantile(allCtryData$infMort, probs = seq(0, 1, by = 0.2))
 
 ```
-Another drawback of quintiles is that we may not want to focus on countries with lower rates, instead isolating the very high risk countries.
+A drawback of quintiles is that we may not want to focus on countries with lower rates, instead isolating the very high risk countries.
 
 ## Categorizing Mortality Rate
  Another option is to look at a histogram and pick cutpoints based on easy references that further isolate the right tail.
@@ -189,7 +189,7 @@ Now we are ready to plot the mortality rates around the world. Size of the point
 library(maps)
 world = map(database = "world", fill = TRUE, col="light grey")
 
-# Add discs
+# Add discs, circles sets radius of discs, fg outlines discs and bg fills them in
 symbols(allCtryData$longitude, allCtryData$latitude, add = TRUE,
         circles= sqrt(allCtryData$pop)/4000, inches = FALSE,
         fg = cols[InfMortDiscrete], bg = cols[InfMortDiscrete])
@@ -206,7 +206,7 @@ legend(x = -150, y = 0, title = "Infant Mortality",
 library(maps)
 world = map(database = "world", fill = TRUE, col="light grey")
 
-# Add discs
+# Add discs, circles sets radius of discs, fg outlines discs and bg fills them in
 symbols(allCtryData$longitude, allCtryData$latitude, add = TRUE,
         circles= sqrt(allCtryData$pop)/4000, inches = FALSE,
         fg = cols[InfMortDiscrete], bg = cols[InfMortDiscrete])

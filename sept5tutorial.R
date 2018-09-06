@@ -1,5 +1,6 @@
 #Read in birth data from .csv file
 o_data <- read.csv("~/Documents/TEACHING/vitalstats/Yr1116Birth.csv", na.strings=c("99", "9999"))
+
 # drop missing values (not always desired but makes things easy for now)
 birth_data <- na.omit(o_data)
 
@@ -7,7 +8,6 @@ birth_data <- na.omit(o_data)
 library(tidyverse)
 
 #birth_data is a data frame that contains variables below as columns
-names(birth_data)
 glimpse(birth_data)
 
 #add labels
@@ -22,7 +22,8 @@ birth_data$MHISP=factor(birth_data$MHISP, levels=c("C","M","N","O","P","S","U"),
                                  "Puerto Rican","Central/South American","Unknown"))
 
 # very basic data cleaning
-birth_data$GEST_C=birth_data$GEST; birth_data$BWTG_C=birth_data$BWTG
+birth_data$GEST_C=birth_data$GEST
+birth_data$BWTG_C=birth_data$BWTG
 birth_data$GEST_C[birth_data$GEST_C>50]=NA
 birth_data$GEST_C[birth_data$GEST_C<20]=NA
 birth_data$BWTG_C[birth_data$BWTG_C<500]=NA
@@ -35,7 +36,7 @@ durhamb16=subset(birth2016,birth2016$CORES=='32')
 #make a plot
 ggplot(data = durhamb16, mapping = aes(x = GEST_C, y = BWTG_C)) +
   geom_point(alpha=1/10,color="blue") + xlab("Gestational age (weeks)") + ylab("Birth weight (g)") + 
-  ggtitle("Durham Co, NC Births, 2011-2016")
+  ggtitle("Durham Co, NC Births, 2016")
 
 # read in some Stata data (use the foreign library and read.dta for earlier versions of Stata)
 # these data are from a study that did not draw a random population sample
