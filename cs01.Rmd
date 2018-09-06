@@ -30,13 +30,13 @@ Using global health data from the World Bank, CIA Factbook, or a complex data so
 - North Carolina Birth Records: these data cannot be shared beyond class participants. Please see Sakai (Resources) for the data and related documentation, and do not disseminate the data any further.
 - Worldwide country-level data on maternal and infant outcomes: publicly available
 
-- [popDF.RData](data/popDF.RData)
+- [popDF.RData](decks/data/popDF.RData)
 
-- [infMortDF.RData](data/infMortDF.RData)
+- [infMortDF.RData](decks/data/infMortDF.RData)
 
-- [codeMapDF.RData](data/codeMapDF.RData)
+- [codeMapDF.RData](decks/data/codeMapDF.RData)
 
-- [full.RData](data/full.RData)
+- [full.RData](decks/data/full.RData)
 
 <!--- 
 
