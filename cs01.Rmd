@@ -36,7 +36,7 @@ Using global health data from the World Bank, CIA Factbook, or a complex data so
 
 - [codeMapDF.RData](decks/data/codeMapDF.RData)
 
-- [allCtryData.Rdata](decks/data/allCtryData.Rdata)
+- [allCtryData.Rdata](decks/data/allCtryData.RData)
 
 - [full.RData](decks/data/full.RData)
 
