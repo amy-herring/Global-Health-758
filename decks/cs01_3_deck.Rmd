@@ -226,7 +226,7 @@ The small countries have symbols that are so tiny that we can barely see them, i
 
 ```{r radiustweakcode, eval=FALSE}
 # Set minimum radius size
-rads = pmax(sqrt(allCtryData$pop)/4000, 1)
+allCtryData$rads = pmax(sqrt(allCtryData$pop)/4000, 1)
 
 # Fix Discs
 world = map(database = "world", fill = TRUE, col="light grey")
@@ -290,6 +290,7 @@ save(allCtryData, file="data/allCtryData.RData") # save for Tableau tutorial
 # Check Data
 allCtryData[allCtryData$ctry %in% c("CH", "SZ", "GB", "UK", "NU","NI","RI","RS"), 
             c(1,6,10,4,5,8,9)]
+
 
 ```
 ## Fixing Map 
