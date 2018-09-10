@@ -53,6 +53,7 @@ Then we will want to create another sheet for our next figure by clicking the fa
 For our next figure, we will create a text table. To do this we will select the variables of interest and drag them into the center of the sheet (or into the "Measure Values" section). This will automatically create a text table of the variables.
 
 ![](dashboard_figures/info.png){width=350px}
+
 Note: if the "Measure Values" do not already show "SUM" instead of another type (e.g., "COUNT"), you can change them by clicking on the relevant bar labels. 
 ***
 
@@ -93,8 +94,6 @@ To create our dashboard, we will want to add our figures we've already created t
 ![](dashboard_figures/preview.png){width=450px}
 
 The first plot we will add will be our map. To do so - drag and drop the map onto the dashboard. 
-
-![](dashboard_figures/add_map.png){width=450px}
 
 Then we can add our other plots in a similar manner. The dashboard will highlight gray in the section where we can drop the plot. We can change the size of the plot by the clicking on the plot and manipulating the edges of the it.
 
