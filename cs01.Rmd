@@ -54,6 +54,10 @@ This case study draws on materials developed in Chapter 11 of Data Science in R:
 
 [Use these instructions](decks/tableaudownload.html) to download Tableau.
 
+[Tableau Cheat Sheet](https://www.google.com/url?sa=t&rct=j&q=&esrc=s&source=web&cd=5&ved=2ahUKEwjBkIbfy7DdAhUD3VMKHZPjCfYQFjAEegQIARAC&url=https%3A%2F%2Fconfluence.umd.edu%2Fdownload%2Fattachments%2F548635432%2FTableau%2520Cheat%2520Sheet%252010-31-2016.pdf%3Fversion%3D1%26modificationDate%3D1484239006000%26api%3Dv2&usg=AOvVaw0M6Y3DNPKOZc3XtNlkVrHz)
+
+[Fancy Tableau Options](https://www.tableau.com/about/blog/2017/10/7-tips-and-tricks-dashboard-experts-76821)
+
 
 # Reports
 

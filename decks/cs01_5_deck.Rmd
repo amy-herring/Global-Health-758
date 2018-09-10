@@ -31,7 +31,7 @@ Sometimes when data is imported into Tableau it may be in the incorrect format f
 
 ![](dashboard_figures/convert_data_type.png){width=300px}
 
-We can also change variables from dimensions to measures.
+We can also change variables from dimensions to measures. Measures are often continuous or count data and in general for these variables, it is quite sensible to take sums, means, etc. Dimensions on the other hand are generally categorical variables like country name, across which we may want to break out our data.
 
 ![](dashboard_figures/change_measure.png){width=250px}
 
