@@ -19,6 +19,9 @@ output:
 knitr::opts_chunk$set(echo = TRUE,fig.width=6, fig.height=5)
 ```
 
+## Next steps
+
+- slide deck on logistic regression (start from slides for 440) and binomial regression
 
 
 ## Birth weight

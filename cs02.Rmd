@@ -18,13 +18,18 @@ library(tidyverse)
 - gain skills to understand consequences of small samples at the design stage of a project
 
 
-# Case Study Goals (coming soon)
+# Case Study Goals
 
+- explore factors related to birth weight in NC
+
+- characterize factors related to infant mortality in NC on a statewide level, including exploration of time trends 
+
+- determine whether infant mortality in specific racial and ethnic groups is level, declining, or on the rise
 
 
 # Data 
 
-We'll use the North Carolina birth weight data on Sakai for this assignment.
+We'll use the North Carolina birth and infant death data on Sakai for this assignment.
 
 
 # Resources 
