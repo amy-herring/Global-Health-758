@@ -22,11 +22,6 @@ library(knitr)
 library(Hmisc)
 ```
 
-## Next steps
-
-- slide deck on logistic regression (start from slides for 440) and binomial regression
-
-
 ## Birth weight
 
 Birth weight is a commonly-used indicator of a newborn infant's health status. Because this indicator is easily obtained, it is a critical component of population health reporting by the World Health Organization and governments around the globe. The distribution of birth weight has often been described as approximately normal, though the left tail in particular is inflated relative to that from a Gaussian distribution.
