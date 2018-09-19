@@ -55,3 +55,6 @@ The case study grade will be based on both reports.
 # Slides
 
 [Linear regression](decks/cs02_1_deck.html)
+<!---
+[GLM](decks/cs02_2_deck.html)
+--->
