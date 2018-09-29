@@ -163,7 +163,7 @@ So we need 6080 people in each group!  Why do we need so many people?
 
  Well, Ebola is thankfully rare, so we will not have many infections. If we could conduct the study in an area with a higher incidence rate, we would not need as many people. However, operationally it could be very difficult to get a study off the ground in the middle of an epidemic.
  
- Suppose, however, you could run a study in a town currently experiencing an epidemic, and that you expect 2\% of the population will contract Ebola, and again you are curious about whether the vaccine can cut that incidence rate in half.
+ Suppose, however, you could run a study in a town currently experiencing an epidemic, and that you expect 2\% of the population will contract Ebola, and again you are curious about whether the vaccine can cut that incidence rate in half (or more).
  
 ## Ebola power calculation 
 
