@@ -177,4 +177,4 @@ Wow, that's a big difference.
 
 ## Sugar drink tax
 
-Suppose we wish to test the efficacy of a tax on sugar drinks. How might we design and carry out the study?
+Suppose we wish to test the efficacy of a tax on sugar drinks. How might we design and carry out the study? What factors do we need to determine to calculate power?
