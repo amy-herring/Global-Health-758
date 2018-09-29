@@ -171,7 +171,9 @@ So we need 6080 people in each group!  Why do we need so many people?
 pwr.2p.test(h=effectsize(0.02,0.01),sig.level=0.05,power=.9)
 ```
 
-Wow, that's a big difference!
+Wow, that's a big difference. 
+
+(Now, we could also have calculated power using other outcomes, such as Ebola deaths or time to infection, which would change the required sample size.)
 
 ## Sugar drink tax
 
