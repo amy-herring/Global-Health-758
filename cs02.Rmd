@@ -60,3 +60,5 @@ The case study grade will be based on both reports.
 - [Logistic regression](decks/cs02_2_deck.html) 
 
 - [Power analysis](decks/cs02_3_deck.html)
+
+- [Fisher's exact test](decks/cs02_4_deck.html)
