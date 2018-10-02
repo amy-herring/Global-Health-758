@@ -19,6 +19,9 @@ output:
 knitr::opts_chunk$set(echo = TRUE,fig.width=6, fig.height=5)
 ```
 
+## 
+
+
 ## Pneumococcus data from contingency tables I BIOS 600 data
 - talk about small samples, 0 cells
 - talk about simple to understand because you want to know how rare -- well you can count all the possibilities and tell exactly!
