@@ -52,13 +52,13 @@ Note: this schedule is approximate and is likely to be modified as the course pr
 | Septmeber 28  | CS2: Generalized Linear Models | |
 | October 3     | CS2: Logistic Regression | CS2 Interim Report  | 
 | October 5     | CS2: Statistical Power |  |
-| October 10    | CS3: Small Sample Methods | |
-| October 12    | CS2: Hands on polishing final reports |  |
-| October 17    | CS3: Hierarchical Models |  CS2 Final Report |
+| October 10    | CS2: Interpreting results of models | |
+| October 12    | CS2: Lab: Interpreting results of models | CS2 Interim Report |
+| October 17    | CS3: Small sample methods |   |
 | October 19    | CS3: Hierarchical Models | Individual Case Study Interim Report |
-| October 24    | CS3: Hands On: Hierarchical Models | CS3 Interim Report  |
-| October 26    | CS4: Cross-Sectional vs. Longitudinal Data |  | 
-| October 31    | CS4: Generalized Estimating Equations |   |
+| October 24    | CS3: Hierarchical Models | CS 2 Final Report  |
+| October 26    | CS4: Lab: Hands on with Hierarchical Models  | CS3 Interim Report  | 
+| October 31    | CS4: Cross-Sectional vs. Longitudinal Data |   |
 | November 2    | CS4: Generalized Estimating Equations | CS3 Final Report |
 | November 7    | CS4: Hands On: Longitudinal Data | Individual Case Study Presentations |
 | November 9    | CS4: Missing Data Basics | Individual Case Study Presentations |
