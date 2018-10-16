@@ -72,7 +72,7 @@ Fisher's exact test is a great first choice for testing a relationship between t
 
 ## A lady tasting tea
 
-[See how Fisher's exact test was invented](http://www.greatfoodandwinesites.com/ReviewSite/tea/lady-tasting-tea}{How did Fisher's Exact Test come about?)
+[See how Fisher's exact test was invented](https://io9.gizmodo.com/how-a-tea-party-turned-into-a-scientific-legend-1706697488)
 
 
 Ironically, Dr. Bristol-Roach, the lady, is better remembered for her fussiness about tea than for the algae that bears her name!
