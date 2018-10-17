@@ -17,26 +17,36 @@ library(tidyverse)
 - fit, interpret, and illustrate results from hierarchical models
 
 
-# Case Study Goals (coming soon)
+# Case Study Goals 
+
+The goal of this case study is to examine county-specific infant mortality rates as a function of race/ethnicity.
 
 
+# Data 
 
-
-# Data (coming soon)
+We'll use the infant mortality data from Sakai.
 
 
 # Resources
 
 - [Logistic Regression in R](https://stats.idre.ucla.edu/r/dae/logit-regression/)
-- [Poisson Regression in R](https://stats.idre.ucla.edu/r/dae/poisson-regression/)
 - [Introduction to Multilevel Models in R](https://rpubs.com/rslbliss/r_mlm_ws)
 - Gelman and Hill, Data Analysis Using Regression and Multilevel/Hierarchical Models
 
 
-# Reports (coming soon)
+# Reports
+
+- Create an interactive visualization in Tableau to show how infant mortality varies across counties, race/ethnicity groups, and time in NC. Visualizations will be presented in class on October 26. This visualization will be included in your final report.
+
+- In a final report due November 14, examine the factors related to infant mortality rates and obtain estimated infant mortality rates for each county, year, and race/ethnicity group using a multilevel model. Write out the model you used in mathematical notation, and incorporate your estimated rates in a Tableau visualization for comparison with that you generated in the interim report. This report is not to exceed 5 pages. Reproducible code for fitting the model should be uploaded along with the report.
+
+The case study grade will be based on the final report.
 
 
 
 # Slides (coming soon)
+
+- [Linear multilevel models](decks/cs03_1_deck.html)
+
 
 

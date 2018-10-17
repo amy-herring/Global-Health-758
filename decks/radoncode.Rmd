@@ -1,0 +1,80 @@
+---
+  title: "Radon code"
+---
+  
+```{r, echo=FALSE, include=FALSE}
+library(kableExtra)
+library(knitr)
+library(tidyverse)
+```
+
+### Code for radon analysis
+
+```{r readsetup}
+srrs2 <- read.table ("srrs2.dat", header=T, sep=",")
+mn <- srrs2$state=="MN"
+radon <- srrs2$activity[mn]
+log.radon <- log (ifelse (radon==0, .1, radon))
+floor <- srrs2$floor[mn]   # 0 for basement, 1 for first floor
+n <- length(radon)
+y <- log.radon
+x <- floor
+
+county.name <- as.vector(srrs2$county[mn])
+uniq <- unique(county.name)
+J <- length(uniq)
+county <- rep (NA, J)
+for (i in 1:J){
+  county[county.name==uniq[i]] <- i
+}
+
+```
+
+```{r fitsimplemodels}
+###pooled model
+lm.pooled<-lm(formula=y~x)
+summary(lm.pooled)
+###unpooled  model
+lm.unpooled<-lm(formula=y~x+factor(county)-1)
+summary(lm.unpooled)
+```
+
+```{r lmer}
+library(lme4)
+#basic MLM with just random intercept for county
+M1<-lmer(y~x+(1|county),REML=FALSE)
+summary(M1)
+```
+
+Here we pull in county-level data on uranium concentrations in the soil.
+
+```{r getcounty}
+srrs2.fips <- srrs2$stfips*1000 + srrs2$cntyfips
+cty <- read.table ("cty.dat", header=T, sep=",")
+usa.fips <- 1000*cty[,"stfips"] + cty[,"ctfips"]
+usa.rows <- match (unique(srrs2.fips[mn]), usa.fips)
+uranium <- cty[usa.rows,"Uppm"]
+u <- log (uranium)
+u.full<-u[county]
+```
+
+```{r updateU}
+# Extended model adding uranium but still only letting county effect be random
+M2<-lmer(y~x+u.full+(1|county),REML=FALSE)
+summary(M2)
+```
+You can add the fixed effects and random effects intercept estimates to get the county-specific estimates.
+```{r countyspecificest}
+#county-specific intercepts (already summed)
+coef(M2)
+#fixed effects
+fixef(M2)
+#random effects
+ranef(M2)
+```
+
+We can also allow variation across county in the association between floor of measurement and radon concentration. 
+```{r M3}
+M3<-lmer(y~x+u.full+(1+x|county),REML=FALSE)
+summary(M3)
+```

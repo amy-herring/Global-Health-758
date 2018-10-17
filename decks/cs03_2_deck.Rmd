@@ -1,0 +1,267 @@
+---
+title: Multilevel Models for Binary Data
+output: 
+  revealjs::revealjs_presentation:
+    theme: night
+    highlight: espresso
+    center: true
+    transition: none
+    css: styles.css
+    fig_caption: true
+    reveal_options:
+      progress: true
+      slideNumber: true
+      
+  
+---
+
+```{r setup, include=FALSE}
+
+```
+## Example: Elections
+
+National opinion polls are conducted by a variety of organizations (e.g., media, polling organizations, campaigns) leading up to elections.
+
+While many of the best opinion polls are conducted at a national level, often estimating opinions at state (or even local) levels is a primary goal of some poll consumers.
+
+Well-designed polls are generally based on national random samples with corrections for nonresponse based on a variety of demographic factors (e.g., sex, ethnicity, race, age, education).
+
+
+
+## Breaking down polls by demographic factors
+
+Both voting preferences and tendency to respond to surveys depend on complex combinations of demographic factors.  We consider an example in which these factors include biological sex (male or female), race (African-American or other), age (4 age groups), educational attainment (4 age groups), and 51 state-level units (including DC), and we are interested in $2\times 2\times 4\times 4\times 51=3264$ potential categories of respondents. Clearly, without a very large survey (most political surveys poll around 1000 people), we will need to make assumptions in order even to obtain estimates in each category.
+
+## Why so many factors?
+
+We need a lot of categories because
+
+- we are interested in estimates for states individually
+
+- nonresponse estimates require inclusion of demographics
+
+Any given survey will have very few, or even no, data in many categories. However, this is not a problem if we use a multilevel model, which borrows information across categories to get better within-category estimates.
+
+## How big a problem is nonresponse?
+
+![](figures/pewnonresp.png)
+
+If you want to know more about factors related to response rates on phone election surveys, check out [this extensive analysis by Pew](http://www.pewresearch.org/2017/05/15/what-low-response-rates-mean-for-telephone-surveys/).
+
+## More on nonresponse
+
+The response rate for my recent poll on usefulness of STA 440 is 75\% (you all are are much better than average -- thanks!)
+
+## Multilevel logistic regression
+
+Multilevel models can be used for binary outcomes (and those on other scales) using a similar approach to that used for normal data: we group coefficients into batches, and a probability distribution is assigned to each batch. Recall our normal data model:  $$y_i \sim N(\alpha_{j[i]}+\beta x_i, \sigma_y^2), ~~~ \alpha_j \sim N\left(\gamma_0,\sigma_\alpha^2 \right).$$  In this case we grouped the county-level intercepts and assigned them a normal distribution. This method is a compromise between complete pooling across counties (same intercept for each county) and no pooling (estimating a separate intercept for each county without borrowing information), where the degree of pooling is determined by the amount of information within and between counties.
+
+## Multilevel linear regression
+
+Another way to think of this model is as a way of handling *correlated* responses -- due to geography (in the radon case), we expect homes closer together to have more similar radon levels than homes further apart. One rough way to account for this spatial correlation is by including a *random effect*, $\alpha_j$, for county. The model under each motivation (adjusting for correlation within counties, or borrowing information across counties) is the same.
+
+If you take spatial statistics, you'll learn more sophisticated ways to borrow information across geography, taking into account how close two data points are in space in borrowing information.
+
+## Multilevel logistic regression
+
+We consider data from CBS News surveys conducted during the week before the 1988 election.  To start, we consider a simple example looking at the preferences of voters (with undecided voters excluded) for either the Republican candidate, Bush Sr. ($y_i=1$), or the Democrat, Dukakis ($y_i=0$). 
+
+```{r arm}
+library(arm)
+```
+
+## Multilevel logistic regression
+```{r state}
+# Load in data for region indicators
+# Use "state", an R data file (type ?state from the R command window for info)
+# Regions:  1=northeast, 2=south, 3=north central, 4=west, 5=d.c.
+# We have to insert d.c. (it is the 9th "state" in alphabetical order)
+data(state)                  # "state" is an R data file
+state.abbr<- c (state.abb[1:8], "DC", state.abb[9:50])
+dc <- 9; not.dc <- c(1:8,10:51)
+region <- c(3,4,4,3,4,4,1,1,5,3,3,4,4,2,2,2,2,3,3,1,1,1,2,2,3,2,4,2,4,1,1,4,1,3,2,2,3,
+            4,1,1,3,2,3,3,4,1,3,4,1,2,4)
+# Load in data from the CBS polls in 1988
+library(foreign)
+polls <- read.dta("data/polls.dta")
+library(R2OpenBUGS)
+# Select just the data from the last survey (#9158)
+ok=survey==9158            # define the condition
+polls.subset=polls[which(polls$survey==9158),]
+```
+
+## Multilevel logistic regression
+```{r state2}
+# define other data summaries
+y <- polls.subset$bush     # 1 if support bush, 0 if support dukakis
+n <- length(y)             # of survey respondents
+n.age <- max(polls.subset$age)    # of age categories
+n.edu <- max(polls.subset$edu)      # of education categories
+n.state <- max(polls.subset$state)  # of states
+n.region <- max(region)  # of regions
+polls.subset$state.lab=factor(polls.subset$state,levels=1:51,labels=state.abbr)
+```
+
+
+## Multilevel logistic regression
+To start, we'll consider a simple model with fixed effects of race-gender combinations and a random effect for state (50 states + the District of Columbia).
+
+$$\text{logit}(Pr(y_i=1))=\alpha_{j[i]}+\beta_{female}female_i+\beta_{black}black_i,$$ $$\alpha_j\sim N(\mu_\alpha,\sigma^2_{state})$$ for $i=1,\ldots,n$ $j=1,\ldots,51$
+
+```{r model1, eval=FALSE}
+library(lme4)
+m1=glmer(bush ~ black + female + (1|state.lab), family=binomial(link="logit"),
+         data=polls.subset)
+summary(m1)
+```
+
+## Multilevel logistic regression
+
+```{r model1b, echo=FALSE}
+library(lme4)
+m1=glmer(bush ~ black + female + (1|state.lab), family=binomial(link="logit"), data=polls.subset)
+summary(m1)
+```
+
+
+## Interpretation
+- For a fixed gender and state, a black respondent has $e^{-1.74}=0.18$ (95\% CI=($e^{-1.74-1.96(0.21)}$,$e^{1.74+1.96(0.21)}$)=(0.12,0.26)) times the odds of supporting Bush as a non-black respondent. 
+- For a given race and state, a female respondent has 0.91 (95\% CI=(0.75,1.09)) times the odds of supporting Bush as a male respondent.
+- The state-level variability is estimated at 0.17
+
+## Extending the model
+
+Now that we've warmed up, let's fit a more sophisticated model that includes other relevant survey factors, such as region, prior vote history (average Republican vote share in the three prior elections, adjusted for home-state and home-region candidate effects), age category, and education category.
+
+```{r dataprocess}
+polls.subset$age.edu=n.edu*(polls.subset$age-1)+polls.subset$edu
+#sc=some college, cg=college grad
+polls.subset$age.edu.lab=factor(polls.subset$age.edu,levels=1:16,
+                              labels=c("18-29,nohs","18-29,hs","18-29,sc","18-29,cg",
+                                       "30-44,nohs","30-44,hs","30-44,sc","30-44,cg",
+                                       "45-64,nohs","45-64,hs","45-64,sc","45-64,cg",
+                                       "65+,nohs","65+,hs","65+,sc","65+,cg"))
+#distinct value for each age/edu combo
+polls.subset$region.full=region[polls.subset$state]
+polls.subset$region.full.lab=factor(polls.subset$region.full,
+                                    levels=1:5,labels=c("NE","S","N","W","DC"))
+```
+
+## Model specification
+
+$$\text{logit}(Pr(y_i=1))=\beta_0+\alpha_{j[i]}^{state}+\alpha_{k[i],l[i]}^{age.edu}+\beta_{f}female_i+\beta_{b}black_i,$$ $$\alpha_j^{state}\sim N(\alpha_{m[j]}^{region}+\beta_{v.prev}v.prev_j,\sigma^2_{state}),$$ $$\alpha_m^{region} \sim N(0,\sigma^2_{region}),$$ $$\alpha_{k,l}^{age.edu} \sim N(0,\sigma^2_{age.edu})$$  
+
+The reason the age by education term is treated as *random* and not *fixed* is that there are quite a few levels (4 age groups and 4 education groups), similar to the case with the state variable.
+
+## Input data on prior election results
+
+```{r priorelection}
+# also include a measure of previous vote as a state-level predictor
+presvote <- read.dta("data/presvote.dta")
+v.prev <- presvote$g76_84pr
+not.dc <- c(1:8,10:51)
+candidate.effects <- read.table ("data/candidate_effects.txt", header=T)
+v.prev[not.dc] <- v.prev[not.dc] +
+ (candidate.effects$X76 + candidate.effects$X80 + candidate.effects$X84)/3
+#rescaling so 1-unit is 1 % point
+polls.subset$v.prev.full=v.prev[polls.subset$state]*100 
+```
+
+## Model specification
+
+```{r model2, eval=FALSE}
+
+m2=glmer(bush ~ black + female + v.prev.full+ (1|state.lab)+(1|age.edu.lab)+
+           (1|region.full.lab), family=binomial(link="logit"), data=polls.subset)
+summary(m2)
+```
+
+## Interpretation
+- For a fixed gender and state, a black respondent has $e^{-1.75}=0.17$ (95\% CI=(0.12,0.26)) times the odds of supporting Bush as a non-black respondent. 
+- For a given race and state, a female respondent has 0.91 (95\% CI=(0.75,1.09)) times the odds of supporting Bush as a male respondent.
+- For each percentage point increase in prior average Republican vote share, residents of a given state, race, and gender have 1.07 (95\%CI=(1.04,1.11)) times the odds of supporting Bush
+
+## Bayesian approach
+Because of the number of categories, the inference in the frequentist model is not entirely reliable as it does not fully account for uncertainty in the estimated variance parameters, and it uses an approximation for inference. We can fit the model in a Bayesian framework using mildly informative priors and quantify uncertainty based on the posterior samples.
+```{r brms, eval=FALSE}
+library(brms) #nice function for Bayes MLM using HMC
+m3=brm(bush ~ black + female + v.prev.full+ (1|state.lab)+(1|age.edu.lab)+
+         (1|region.full.lab), 
+       family=bernoulli(link="logit"), control = list(adapt_delta = 0.995),
+       data=polls.subset)
+
+```
+
+## Bayesian approach
+
+```{r brms3, echo=FALSE}
+library(brms) #nice function for Bayes MLM using HMC
+```
+
+```{r brms11, cache=TRUE}
+m3=brm(bush ~ black + female + v.prev.full+ (1|state.lab)+(1|age.edu.lab)+(1|region.full.lab), family=bernoulli(link="logit"), control = list(adapt_delta = 0.995), data=polls.subset)
+
+```
+
+## Summary of fit
+
+```{r brmssummary}
+summary(m3)
+```
+
+## Visualize fitted values
+```{r brms2, eval=FALSE}
+#Plot estimated OR's with 2 SD error bars ea. side
+library(sjPlot)
+plot_model(m3)
+plot_model(m3,type="re")
+```
+
+## Fixed effects
+![](figures/fixef.png){width=80%}
+
+## Random effects
+![](figures/a1829.png){width=80%}
+
+## Random effects
+![](figures/a3044.png){width=80%}
+
+## Random effects
+![](figures/14564.png){width=80%}
+
+## Random effects
+![](figures/a65plus.png){width=80%}
+
+## Random effects
+![](figures/region.png){width=80%}
+
+
+## Random effects
+![](figures/state.png){width=80%}
+
+## Making predictions
+
+If you look at the y-axis carefully, you'll note that estimates are not presented for states not present in the data. If we are interested in making a prediction for Alaska, for example, we can use the multilevel model to do so. While this may seem a bit flaky, note that we do have a lot of information about survey responses in other states for the election of interest, and we also have historical data specific to Alaska.
+
+Let's make a prediction for a non-black male from Alaska, aged 30-44 with a high school diploma.  (Values of prior vote, state, and region are determined by the state.)
+
+```{r predictAK}
+newdata <- data.frame(black=0,female=0,v.prev.full=62.97,state.lab="AK",
+                      age.edu.lab="30-44,hs",region.full.lab="W")
+                      
+predict(m3,newdata=newdata,allow_new_levels=TRUE)
+```
+                      
+    
+## Predictions
+
+Now let's compare that prediction to what we might predict for a similar participant who is from Massachusetts instead.
+
+```{r predictMA}
+newdata2 <- data.frame(black=0,female=0,v.prev.full=48.98,state.lab="MA",
+                       age.edu.lab="30-44,hs",region.full.lab="NE")
+                      
+predict(m3,newdata=newdata2,allow_new_levels=TRUE)
+```
+
+
