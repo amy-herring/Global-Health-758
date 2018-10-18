@@ -182,8 +182,14 @@ Let's examine the probability of remission as a function of IL6, CRP, cancer sta
 
 ```{r m1, eval=FALSE}
 library(lme4)
-m1=glmer(remission ~ IL6 + CRP + CancerStage + LengthofStay + Experience + FamilyHx +  (1 | DID), family = binomial, data=lung, control=glmerControl(optimizer="bobyqa"),nAGQ=10,optCtrl=list(maxfun=2e5)) 
-#these models can be flaky. Specifying a different optimizer to avoid convergence problems with default
+m1=glmer(remission ~ IL6 + CRP + CancerStage + LengthofStay + Experience + FamilyHx
+         +  (1 | DID), family = binomial, data=lung,
+         control=glmerControl(optimizer="bobyqa"),
+         nAGQ=10,optCtrl=list(maxfun=2e5)) 
+summary(m1)
+#these models can be flaky. Specifying a different optimizer to avoid 
+# convergence problems with default
+
 ```
 
 ## Multilevel logistic model
@@ -195,8 +201,8 @@ library(lme4)
 m1=glmer(remission ~ IL6 + CRP + CancerStage + LengthofStay + Experience + FamilyHx
          + Age+ (1 | DID), family = binomial, data=lung, 
          control=glmerControl(optimizer="bobyqa"),nAGQ=10,optCtrl=list(maxfun=2e5)) 
-#these models can be flaky. Specifying a different optimizer to avoid convergence
-#problems with default
+#these models can be flaky. Specifying a different optimizer to avoid 
+#convergence problems with default
 summary(m1)
 ```
 
@@ -224,4 +230,51 @@ new=data.frame(IL6=rep(3.344,newn),CRP=rep(4.333,newn),CancerStage=rep("II",newn
                Experience=docmat$Experience,DID=docmat$DID)
 probremiss=predict(m1,newdata=new,type="response")
 summary(probremiss) 
+```
+
+## Plots
+We can also plot the doctor-specific effects; note that these are centered around zero, with positive values indicating doctors whose patients are more likely to experience remission, and negative values those whose patients are less likely to experience remission.
+
+```{r plot, eval=FALSE}
+#turn off doctor ID's due to inability to read all
+lattice::dotplot(ranef(m1,which="DID",condVar=TRUE), 
+                 scales = list(y = list(alternating = 0)))
+
+```
+## Plots
+
+```{r plot2, echo=FALSE, cache=TRUE}
+#turn off doctor ID's due to inability to read all
+lattice::dotplot(ranef(m1,which="DID",condVar=TRUE), scales = list(y = list(alternating = 0)))
+
+```
+
+
+## 3-level model
+
+The model we fit to the data is commonly called a two-level model, with levels for patient and doctor. We can also fit a three-level model, adding the hospital to the mix.
+
+```{r threelevel,eval=FALSE}
+m2=glmer(remission ~ IL6 + CRP + CancerStage + LengthofStay + Experience + FamilyHx
+         + Age+ (1 | DID) + (1|HID), family = binomial, data=lung, 
+         control=glmerControl(optimizer="bobyqa"),optCtrl=list(maxfun=2e5)) 
+summary(m2)
+```
+
+## 3-level model
+
+
+```{r threelevelb,echo=FALSE, cache=TRUE}
+m2=glmer(remission ~ IL6 + CRP + CancerStage + LengthofStay + Experience + FamilyHx
+         + Age+ (1 | DID) + (1|HID), family = binomial, data=lung, 
+         control=glmerControl(optimizer="bobyqa"),optCtrl=list(maxfun=2e5)) 
+summary(m2)
+```
+
+
+## Examining hospital effects
+
+```{r plothosp}
+lattice::dotplot(ranef(m2,which="HID",condVar=TRUE))
+
 ```

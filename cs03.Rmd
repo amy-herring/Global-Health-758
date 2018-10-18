@@ -49,6 +49,6 @@ The case study grade will be based on the final report.
 # Slides 
 
 - [Linear multilevel models](decks/cs03_1_deck.html)
-<!---
+
 - [Multilevel logistic regression](decks/cs03_2_deck.html)
---->
+
