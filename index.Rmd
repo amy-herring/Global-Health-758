@@ -6,6 +6,9 @@ output:
   
 ---
 
+
+
+
 ---
 title: "GLHLTH 758: Case Studies in Data Science"
 description: "Application of statistical and data science skills to in-depth data analysis projects in global health. Principled use and interpretation of modern tools, including data wrangling and munging, visualization, exploratory analysis, predictive modeling, and inference using modern statistical software applied to global health data. Emphasis on communication of analysis results both technically and non-technically via presentations and written reports. Students must have access to data for course project. Prerequisite: GLHLTH 705"

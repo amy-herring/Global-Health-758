@@ -24,7 +24,9 @@ The goal of this case study is to examine county-specific infant mortality rates
 
 # Data 
 
-We'll use the infant mortality data from Sakai.
+The data from this case study are simulated data (based on real data but generated randomly to eliminate risk of disclosure). The background is that a large HMO wants to know what patient and physician factors are most related to whether a patient’s lung cancer goes into remission after treatment as part of a larger study of treatment outcomes and quality of life in patients with lung cancer.
+
+- [Simulated lung cancer data](https://stats.idre.ucla.edu/stat/data/hdp.csv)
 
 
 # Resources
@@ -32,7 +34,7 @@ We'll use the infant mortality data from Sakai.
 - [Logistic Regression in R](https://stats.idre.ucla.edu/r/dae/logit-regression/)
 - [Introduction to Multilevel Models in R](https://rpubs.com/rslbliss/r_mlm_ws)
 - Gelman and Hill, Data Analysis Using Regression and Multilevel/Hierarchical Models
-
+- [Introduction to GLMMs](https://stats.idre.ucla.edu/other/mult-pkg/introduction-to-generalized-linear-mixed-models/)
 
 # Reports
 
@@ -48,5 +50,5 @@ The case study grade will be based on the final report.
 
 - [Linear multilevel models](decks/cs03_1_deck.html)
 
-
+- [Multilevel logistic regression](decks/cs03_2_deck.html)
 
