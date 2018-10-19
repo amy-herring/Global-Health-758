@@ -22,7 +22,7 @@ knitr::opts_chunk$set(echo = TRUE,fig.width=6, fig.height=5)
 
 A large HMO wants to know what patient and physician factors are most related to whether a patient’s lung cancer goes into remission after treatment as part of a larger study of treatment outcomes and quality of life in patients with lunger cancer.  
 
-We consider simulated data that mimic real data relevant to this question.
+We consider simulated data that mimic real data relevant to this question. [This simulation](https://stats.idre.ucla.edu/r/dae/mixed-effects-logistic-regression/) was created by the [UCLA Institute for Digital Research and Education (IDRE)](https://stats.idre.ucla.edu), which has *great* examples online of many different analyses. Check it out!
 
 
 ## Lung cancer data

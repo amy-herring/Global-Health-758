@@ -35,6 +35,7 @@ The data from this case study are simulated data (based on real data but generat
 - [Introduction to Multilevel Models in R](https://rpubs.com/rslbliss/r_mlm_ws)
 - Gelman and Hill, Data Analysis Using Regression and Multilevel/Hierarchical Models
 - [Introduction to GLMMs](https://stats.idre.ucla.edu/other/mult-pkg/introduction-to-generalized-linear-mixed-models/)
+- [Details on Example from IDRE](https://stats.idre.ucla.edu/r/dae/mixed-effects-logistic-regression/)
 
 # Reports
 
