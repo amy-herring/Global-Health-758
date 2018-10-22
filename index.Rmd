@@ -59,10 +59,10 @@ Note: this schedule is approximate and is likely to be modified as the course pr
 | October 12    | CS2: Lab: Interpreting results of models |  |
 | October 17    | CS3: Small sample methods |  CS2 Interim Report |
 | October 19    | CS3: Hierarchical Models | Individual Case Study Interim Report |
-| October 24    | CS3: Hierarchical Models | CS 2 Final Report  |
-| October 26    | CS3 Visualization Presentations and Hands on with Hierarchical Models  | CS3 Interim Report (Class Presentation)  | 
+| October 24    | CS3: Hands on with Hierarchical Models & Interim Report Feedback | CS 2 Final Report  |
+| October 26    | CS3  Hands on with Hierarchical Models  |   | 
 | October 31    | CS4: Cross-Sectional vs. Longitudinal Data |   |
-| November 2    | CS4: Longitudinal Data |  |
+| November 2    | CS3 Visualization presentations and CS4: Longitudinal Data | CS3 Interim Report (Class Presentation) |
 | November 7    | CS4: Missing Data Basics | Individual Case Study Presentations  |
 | November 9    | Individual Case Studies | Individual Case Study Presentations |
 | Movember 14   | Individual Case Studies |Individual Case Study Presentations and CS3 Final Report  |
