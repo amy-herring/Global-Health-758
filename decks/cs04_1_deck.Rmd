@@ -46,6 +46,7 @@ individual, though individuals may belong to different cohorts.
 
 
 ![Longitudinal vs Cross-Sectional Analysis](figures/class1_toyex.png)
+
 ## <small>Longitudinal vs Cross-Sectional Analysis </small>
 
 A key feature of the longitudinal design above is that one cohort of
@@ -176,12 +177,12 @@ where $\rho_{jk}=\frac{\sigma_{jk}}{\sqrt{\sigma_{jj}\sigma_{kk}}}$ and $-1 \leq
 
 Statistical models may parameterize the covariance of longitudinal data in different ways. The forms given on the previous slides show an *unstructured* covariance, which makes no assumptions but involves a lot of parameters to estimate. 
 
-With longitudinal data, we can generally make a number of assumptions about how observations are related over time to reduce the number of parameters we are estimating.
+With longitudinal data, we can generally make a number of assumptions about how observations are related over time to reduce the number of parameters we are estimating. For example, we may assume correlations are positive, or that certain natural patterns exist.
 
 ## Covariance Structures
 
 Some popular options for modeling covariance include:
 
 - Homogeneous compound symmetry: variances and correlations are constant over time; that is, $\sigma_{11}=\sigma_{22}=\cdots=\sigma_{nn}=\sigma$ and $\rho_{jk}=\rho_{j'k'}=\rho$
-- Heterogeneous compound symmetry: variances may change over time but correlations remain constant: $\rho_{jk}=\rho_{j'k'}$ but we estimate $n$ different variance components $\sigma_{11}, \ldots, \sigma_{nn}$. This is a bad choice if the measurement times are not the same for all subjects (as $n$ may get pretty big)
+- Heterogeneous compound symmetry: variances may change over time but correlations remain constant: $\rho_{jk}=\rho_{j'k'}$ and we estimate $n$ different variance components $\sigma_{11}, \ldots, \sigma_{nn}$. This can be a bad choice if the measurement times are not the same for all subjects (as $n$ may get pretty big)
 - Autoregressive: works with homogeneous or heterogeneous variances; correlation decreases over time in a specified manner, such as AR(1), which indicates $\rho_{j,j+1}=\rho$, $\rho_{j,j+2}=\rho^2,$ etc.
