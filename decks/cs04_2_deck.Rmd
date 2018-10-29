@@ -1,0 +1,235 @@
+---
+title: Longitudinal Data Analysis
+output: 
+  revealjs::revealjs_presentation:
+    theme: night
+    highlight: espresso
+    center: true
+    transition: none
+    css: styles.css
+    fig_caption: true
+    reveal_options:
+      progress: true
+      slideNumber: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(knitr)
+library(ggplot2)
+library(dplyr)
+library(plyr)
+```
+
+## SHARE Child Data
+
+```{r sharechild,eval=FALSE}
+library(readstata13)
+dep=read.dta13("~/Documents/TEACHING/SHARE-Child data/
+               SC_anonymized_forAmy_20180314.dta")
+#PHQ>9 a sign of potential moderate to severe depression
+dep$depressed=dep$phqTotal>9; dep$depressedbin=as.numeric(dep$depressed)
+dep$educat=cut(dep$momEduc,breaks=c(-.001,12,16))
+dep$agecat=cut(dep$momAge,breaks=c(15,30,41))
+tabtmp=count(dep,c("timepoint","depressed"))
+ggplot(tabtmp,aes(x=timepoint,y=freq,fill=as.factor(depressed)))+
+  geom_col(aes(fill=as.factor(depressed)))
+
+```
+
+
+## SHARE-Child Data
+
+```{r sharechild2,echo=FALSE,message=FALSE,out.width="50%"}
+library(readstata13)
+dep=read.dta13("~/Documents/TEACHING/SHARE-Child data/SC_anonymized_forAmy_20180314.dta")
+#PHQ>9 a sign of potential moderate to severe depression
+dep$depressed=dep$phqTotal>9; dep$depressedbin=as.numeric(dep$depressed)
+dep$educat=cut(dep$momEduc,breaks=c(-.001,12,16))
+dep$agecat=cut(dep$momAge,breaks=c(15,30,41))
+tabtmp=count(dep,c("timepoint","depressed"))
+ggplot(tabtmp,aes(x=timepoint,y=freq,fill=as.factor(depressed)))+geom_col(aes(fill=as.factor(depressed)))
+
+```
+
+Here we see the prevalence of depression decreases some after baseline, and there is a fair amount of missing data after baseline as well.
+
+## Longitudinal analysis
+
+We can test whether there is a significant decrease in depression levels after baseline using a longitudinal analysis. This analysis is needed because data are paired in a complicated manner:  the participants at time 1 are a subset of those at baseline (time 0), the participants at time 2 are a subset of those at baseline, but there is no particular nesting structure among those measured at time 1 and time 2, complicating any paired tests we might conduct. We need to think about models not just for the mean at a given time, but also for the association within person.
+
+## Marginal models
+
+*Marginal models* specify the mean and covariance models separately.  We will assume that the marginal distribution for the response $Y_{ij}$ of subject $i$ at time $j$ is given by $$Y_{ij} = \exp \Big[\frac{Y_{ij}\theta_{ij} -b(\theta_{ij})}{{\phi}}-c(Y_{ij},\phi)\Big],$$ so that each $Y_{ij}$ has a distribution from the exponential family.  We model the marginal expectation of each response, $E(Y_{ij})$, as a function of covariates of interest.
+
+Yikes!  What does this mean for some models we know about?
+
+## Continuous response model: one example
+
+- $\mu_{ij}=\eta_{ij}={\bf X}_{ij}\boldsymbol{\beta}$ (a linear regression)
+- $\text{Var}(Y_{ij})=\sigma^2$ (homogeneous variance)
+- $\text{Corr}(Y_{ij},Y_{ik})=\rho^{|k-j|}$, $(0 \leq \rho \leq 1)$ (autoregressive correlation)
+
+## Binary response model: one example
+
+- $\text{logit}(\mu_{ij})=\eta_{ij}={\bf X}_{ij}\boldsymbol{\beta}$ (logistic regression)
+- $\text{Var}(Y_{ij})=\mu_{ij}(1-\mu_{ij})$ (based on Bernoulli distribution; standard for logistic regression)
+- $\text{Corr}(Y_{ij},Y_{ik})=\rho$ (compound symmetric correlation)
+
+## Marginal models
+
+In marginal models, parameters have *population-averaged* interpretations.  It is important to note that the type or size of the correlation does not affect the interpretation of $\beta$.  The regression parameters $\beta$ describe the effect of covariates on the average responses.
+
+## Generalized estimating equations (GEE)
+
+Liang and Zeger (1986) proposed an alternative to maximum likelihood for estimating marginal models based on the concept of *estimating equations*.  Their approach is a single general and unified method for analyzing discrete (or continuous) responses using marginal models. 
+
+Nice aspects of this approach include simple interpretations and easy estimation methods. 
+
+Drawbacks are that the emphasis is on describing trends in the mean response, missing data is assumed to be missing completely at random, that estimates of correlation are not a focus (if that's your goal, try a multilevel model instead).
+
+## GEE
+
+To fit a GEE, you specify three components.
+
+- mean model (predictors, interactions, etc. just as in a logistic regression)
+- variance function (this is often dictated by the outcome type, e.g. Bernoulli or binomial variance for dichotomous data)
+- working correlation structure (e.g., compound symmetry, autoregressive, etc)
+
+GEE is robust to misspecification of the working correlation structure if the *empirical* (a.k.a. "sandwich") covariance estimator is used, but estimates will be most precise when you have specified the correct structure. However, this "insurance" is nice when you do not have a lot of data about what the association among repeated measures should look like.
+
+## GEE covariance estimators
+
+With GEE we have two options for covariance estimation: *model-based* and *empirical* estimators.
+
+If we correctly specify the variance-covariance model, we can use the  model-based variance estimator in order to conduct inferences.  We would expect to gain some power in this situation.  However, if the covariance model is reasonable and the sample size is large enough, the empirical and model-based standard errors should not differ greatly.  We note that you want to have around $N=100$ subjects to use the empirical covariance estimator with binary data.
+
+## Simple GEE for our data
+
+For the depression data, a simple model would evaluate the odds of depression as a function of time time period of measurement. This model is specified as
+
+$$\text{logit}(Pr(y_{ij}=1))=\beta_0+\beta_1I(time_i=1)+\beta_2I(time_i=2),$$ with a Bernoulli variance function. For simplicity, we will assume a compound symmetric (exchangeable) working correlation, which implies $\text{Corr}(y_{i1},y_{i2})=\text{Corr}(y_{i1},y_{i3})=\text{Corr}(y_{i2},y_{i3})$.
+
+## GEE: time only
+
+```{r gee, eval=FALSE}
+library(geepack)
+dep2=select(dep,depressedbin,timepoint,anon_id,educat)
+#geepack needs NA values to be dropped
+newdep=na.omit(dep2) 
+#id is used to identify the repeated measures (independent units)
+#waves tells R the ordering of the observations within participant
+m1=geeglm(depressedbin~factor(timepoint),id=as.factor(anon_id),family=binomial(),
+          corstr="exchangeable",data=newdep,waves=timepoint)
+summary(m1)
+
+```
+
+
+## GEE: time only
+
+```{r gee2, echo=FALSE}
+library(geepack)
+dep2=select(dep,depressedbin,timepoint,anon_id,educat)
+#geepack needs NA values to be dropped
+newdep=na.omit(dep2) 
+#id is used to identify the repeated measures (independent units)
+#waves tells R the ordering of the observations within participant
+m1=geeglm(depressedbin~factor(timepoint),id=as.factor(anon_id),family=binomial(),
+          corstr="exchangeable",data=newdep,waves=timepoint)
+summary(m1)
+
+```
+
+- Coefficients table contains the estimates and SE's of interest
+- Estimated correlation is provided as alpha (note range of correlation for discrete data is limited by means, so do not get too excited about this)
+- Last line lists number of clusters (people in this case) and the maximum cluster size
+
+## Calculating OR's and CI's
+
+It is easy to use the robust standard errors to calculate odds ratios and confidence intervals.
+
+```{r oddsratios}
+m1est=coef(summary(m1))$Estimate
+m1se=coef(summary(m1))$Std.err
+cbind(exp(m1est),exp(m1est-1.96*m1se),exp(m1est+1.96*m1se))[2:3,]
+```
+
+Clearly, the odds of depression are lower after the baseline measurement. For example, the odds of depression at time 1 are only 0.31 (95\%CI=(0.19, 0.51)) times the odds of depression at baseline.
+
+## GEE: "chunk" test
+
+In `geepack`, it is easy to request a "chunk test" of the significance of an entire group of predictors using the `anova` command. This test is a multivariate Wald test (the GEE model does not involve a full likelihood, and we do not get likelihood ratio tests).
+
+```{r geechunk}
+anova(m1)
+```
+
+The p-value listed is for the test of the hypothesis $H_0: \beta_1=\beta_2=0$, which tests whether there is any difference in the depression scores over time. In this case, clearly there is a change in depression scores over time.
+
+## Comparing the two post-baseline measures
+
+We can use our previous trick of resetting the referent level in order to evaluate whether there is a difference in depression levels at the two post-baseline measures.
+
+
+```{r relevel, eval=FALSE}
+newdep$time2ref=relevel(as.factor(newdep$timepoint),ref="2")
+m1b=geeglm(depressedbin~time2ref,id=as.factor(anon_id),family=binomial(),
+           corstr="exchangeable",data=newdep,waves=timepoint)
+summary(m1b)
+
+```
+
+
+## Comparing the two post-baseline measures
+
+
+```{r relevel2, echo=FALSE}
+newdep$time2ref=relevel(as.factor(newdep$timepoint),ref="2")
+m1b=geeglm(depressedbin~time2ref,id=as.factor(anon_id),family=binomial(),
+           corstr="exchangeable",data=newdep,waves=timepoint)
+summary(m1b)
+
+```
+
+We see the estimate for the time point 1 (compared to the referent of time 2) is not statistically significant, indicating there is no difference in depression levels at the two post-baseline occasions.
+
+## Group effects
+
+Next, we may wish to evaluate whether there are any differences in depression levels as a function of maternal education. To start, we can fit a model that allows a different probability of depression according to whether a woman has $>12$ years of education or not. 
+
+$$\text{logit}(Pr(y_{ij}=1))=\beta_0+\beta_1I(time_i=1)+\beta_2I(time_i=2)+\beta_3I(edu_i>12),$$
+
+## Education main effects in model
+
+```{r educ}
+m2=geeglm(depressedbin~as.factor(timepoint)+educat,id=as.factor(anon_id),
+          family=binomial(),corstr="exchangeable",data=newdep,waves=timepoint)
+summary(m2)
+```
+
+Examining the p-value, we do not see evidence of an association between having $>$ 12 years of education and depression level.  
+
+## Education interaction
+
+One possibility we have not checked is that education has a different impact on depression risk at each time point. We can evaluate this using an interaction term as follows.
+
+\begin{eqnarray*} \text{logit}(Pr(y_{ij}=1))&=&\beta_0+\beta_1I(time_i=1)+\beta_2I(time_i=2) \\
+& & +\beta_3I(edu_i>12) + \beta_4I(time_i=1)I(edu_i>12) \\ & & + \beta_5I(time_i=2)I(edu_i>12) \end{eqnarray*}
+
+## Education interaction
+
+```{r eduint}
+m3=geeglm(depressedbin~as.factor(timepoint)*educat,id=as.factor(anon_id),
+          family=binomial(),corstr="exchangeable",data=newdep,waves=timepoint)
+summary(m3)
+
+```
+
+## Education interaction
+
+```{r eduintanova}
+anova(m3)
+```
+
+We don't see any evidence of any interaction here. It looks like education (at least in terms of our parameterization here) is unrelated to depression levels and is also unrelated to any potential change in depression levels over time.
