@@ -44,5 +44,5 @@ In a report due November 30, describe trends in depression over time and whether
 # Slides
 
 - [Longitudinal versus Cross-Sectional Data](decks/cs04_1_deck.html)
-
+- [Generalized estimating equations](decks/cs04_2_deck.html)
 
