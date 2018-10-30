@@ -1,0 +1,359 @@
+---
+title: Missing Data
+output: 
+  revealjs::revealjs_presentation:
+    theme: night
+    highlight: espresso
+    center: true
+    transition: none
+    css: styles.css
+    fig_caption: true
+    reveal_options:
+      progress: true
+      slideNumber: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+
+```
+  
+## Motivating Example: Pregnancy, Infection, & Nutrition (PIN) Study
+
+- Prospective study of risk factors for adverse birth outcomes in central NC prenatal care clinics
+- We would like to study how cocaine use relates to small-for-gestational-age (SGA) births
+- Covariates: maternal age, race, income, parity, and education
+- Cocaine measured on questionnaire, in urine, and in hair
+
+## Mathematical notation
+- Let $Y$ = $(Y_{obs},Y_{mis})$
+  - $r_i = 1$ if data for unit $i$ is missing, $r_i = 0$ otherwise
+- $R = (r_1,..., r_n)$
+  - $\theta$ denote the parameters associated with $Y$
+  - $\psi$ denote the parameters associated with $R$
+  - this assumes we have just one variable subject to missingness; in practice we may have multiple variables per subject and thus multiple indicators of missingness per subject (one per variable)
+  
+## Types/Mechanisms of Missing Data
+## Missing completely at random (MCAR)
+  - Subjects with missing data are a completely random sample of study subjects
+- e.g. hair cocaine missing for subset of women who were never asked to provide it for study logistical reasons
+- in mathematical notation $f(R|Y,\theta, \psi) = f(R|\psi)$
+  
+## Missing at random (MAR)
+  - Missingness may depend on observed variables, but not on the missing values themselves
+- e.g., hair samples missing more often for older women or for women with very short hair (and we record hair length in study)
+- in mathematical notation $f(R|Y,\theta, \psi) = f(R|Y_{obs},\psi)$
+  
+## Missing not at random/nonignorable (MNAR)
+  - Missingness may depend on the missing values themselves and may also depend on observed values
+- e.g., women who have used cocaine recently are less likely to provide biospecimens for drug testing
+- mathematcally, we have $f(R|Y,\theta, \psi) = f(R|Y_{obs},Y_{mis},\psi)$
+  
+## Methods of Handling Missing Data
+## Complete case analysis
+  - Use only the set of observations with no missing values
+- When missingness is MCAR, then the complete case estimator is unbiased
+- Often good approach when percentage of data missing is small ($<$ 5-10\%)
+- If there are many different variables with missing values, a large fraction of the observations may be dropped, resulting in inefficient use of information even under this mechanism
+
+## *Ad hoc* methods
+- Creation of an indicator of missingness as a new variable
+- Simple imputation with mean of observed values, or prediction from regression model
+- Last value carried forward
+- Hot deck imputation: replace missing value with an observed response from a "similar" subject
+- Easy to implement, but have the potential to induce bias, not recommended
+
+## Maximum likelihood
+- Involves specification of model for any variables subject to missing data
+- Then one can integrate the likelihood over the missing values, obtaining the likelihood of the observed data (observed data likelihood)
+- Then we maximize the observed data likelihood
+- Can be quite computationally intensive
+- Done automatically in multilevel models though assumes MCAR or MAR missing data
+
+## Multiple imputation
+- Generate $p$ possible values for each missing observation (typically 5-10 imputated datasets are created)
+- Each of these datasets is analyzed using complete-data methods
+- Combine the results of $p$ separate analyses, allowing the uncertainty regarding the imputation to be taken into account
+- Often the easiest solution 
+- Software implementations offer a variety of choices for models from which to impute data (many flavors of MI are available, and MI can be used for any missing data mechanism, though software may restrict this)
+- Bayesian inference can easily accommodate "imputation" directly in sampling algorithms when distribution of variables subject to missingness specified (treat missing data as parameters to estimate)
+
+## MICE
+- Multiple Imputation using Chained Equations
+- Also known as "fully conditional specification" or "sequential regression multiple imputation"
+- Involves a variable-by-variable approach for a set of variables $(Y_1,\ldots,Y_q)$ for each participant
+- Imputation model is specified separately for each variable, using the other variables as predictors, e.g. specify $f(Y_j|Y_{(-j)})$, where $Y_{(-j)}=(Y_1,Y_2, ... ,Y_{j-1},Y_{j+1}, ... ,Y_q)$
+  - At each stage of the algorithm, an imputation is generated for the missing variable, then this imputed value is used in the imputation of the next variable
+- Repeat this process for several cycles to obtain one imputed dataset
+- Then impute multiple datasets
+
+
+## Example
+
+We'll walk through a small example in R with the NHANES dataset. It contains 25 obs and four variables: age (age groups: 1=20-39, 2=40-59, 3=60+), bmi (body mass index, in kg/m$^2$), hyp (hypertension status, 1=no, 2=yes) and chl (total cholesterol, in mg/dL).
+```{r,librarydata,warning=FALSE,message=FALSE}
+# required libraries
+library(mice)
+library(VIM)
+library(lattice)
+
+
+# load data
+data(nhanes)
+str(nhanes)
+nhanes$age <- factor(nhanes$age)
+```
+
+
+## Patterns of missing data
+```{r,pattern,out.width="40%"}
+md.pattern(nhanes)
+```
+<small>
+- 5 patterns observed from $2^3$ possible patterns
+</small>
+
+## <small> Patterns of missing data </small>
+
+```{r,pattern2,out.width="40%",echo=FALSE}
+md.pattern(nhanes)
+```
+
+<small>
+- 1st column gives pattern count (subjects)
+- last column gives \# variables missing in each pattern
+- last row gives total number of missing values (not subjects)
+- e.g., 3 cases in which only cholesterol is missing
+- age always observed
+- complete case analysis would use the 52\% of data that are observed (pretty high fraction of missingness)
+</small>
+
+## Visualizing missing data patterns
+
+The VIM package provides nice visualizations of the fraction of data missing and missing data patterns. Blue is used for observed data and red for missing.
+
+```{r,patternviz,eval=FALSE}
+nhanes_aggr <- aggr(nhanes,col=mdc(1:2),numbers=TRUE,sortVars=TRUE,
+labels=names(nhanes),cex.axis=.7, gap=3, 
+ylab=c("Proportion missing","Missingness Pattern"))
+```
+
+## Visualizing missing data patterns
+
+```{r,patternviz2,echo=FALSE}
+nhanes_aggr <- aggr(nhanes,col=mdc(1:2),numbers=TRUE,sortVars=TRUE,
+labels=names(nhanes),cex.axis=.7, gap=3, ylab=c("Proportion missing","Missingness Pattern"))
+```
+
+
+
+## More visualization
+
+Margin plots can be used to understand how missingness affects the distribution of values on other variables. 
+
+- Blue boxplots summarise the distribution of observed data given the other variable is observed 
+- Red box plots summarise the distribution of observed data given the other variable is missing
+- If data are MCAR, you expect the boxplots to be the same (hard to evaluate in this small sample)
+
+## More visualization
+
+
+```{r,marginplot,out.width='70%'}
+marginplot(nhanes[, c("chl", "bmi")], col = mdc(1:2), cex.numbers = 1.2, pch = 19)
+```
+
+
+
+
+## Multiple imputation
+
+```{r,mice, cache=TRUE}
+imp <- mice(nhanes, m=20, printFlag=FALSE, maxit = 40, seed=2525) 
+# The output imp contains m=20 completed datasets 
+# Imputation by default used predictive mean matching 
+# (we will discuss that method shortly!)
+fit.mi <- with(data=imp, expr = lm(chl ~ age + bmi))
+#Function with() used to fit a simple linear model to each imputed dataset
+#Expr stands for model expression
+```
+
+## Look at individual results
+
+```{r look120}
+fit.mi$analyses[[1]] #see analysis of 1st imputed dataset
+fit.mi$analyses[[20]] #see analysis of 20th imputed dataset
+
+```
+
+## Combining estimates
+
+Clearly, point estimates differ across imputations, so we have $\widehat{\beta}_1, ..., \widehat{\beta}_{20}$. Variance estimates will also differ across imputed datasets; letting the matrix $U_j=\widehat{\text{Cov}}(\widehat{\beta}_j)$ then we have $U_1, ..., U_{20}$.  
+
+What if age seems important in one imputed data set but not another?  How do we combine estimates to make an overall conclusion?
+
+*Rubin's rules* dictate how estimates should be combined across imputed datasets. 
+
+
+## Rubin's rules
+
+Our overall point estimate over $m$ imputations is given by $$\widetilde{\beta}=\frac{1}{m} \sum_{j=1}^m \widehat{\beta}_j.$$
+  
+
+  
+  The average variance over imputations is given by $$\widetilde{U}=\frac{1}{m} \sum_{j=1}^m U_j,$$ but this only tells part of the story, as we also need to consider the variance in the $\widehat{\beta}_j$ across the $m$ imputations, which is given by $$B=\frac{1}{m-1}\sum_{j=1}^m (\widehat{\beta}_j-\widetilde{\beta})'(\widehat{\beta}_j-\widetilde{\beta}).$$ 
+
+## Total variance
+
+Rubin defines the total variance as $$T=\widetilde{U}+B(1+\frac{1}{m}),$$ where 
+
+- $\widetilde{U}$ represents the contribution of the sampling variance, 
+- $B$ is the extra variance due to having missing data, and 
+- $\frac{1}{m}B$ is the extra simulation variance due to estimating our parameters using a finite $m$.
+
+## Combining estimates across models
+
+```{r,combine}
+combFit <- pool(fit.mi) # Combine all the results of the 20 imputed datasets
+
+round(summary(combFit),2)
+
+```
+
+<!---
+- FMI: fraction of missing information, proportion of total sampling variance due to missing data
+- $\lambda$: \% increase in variance due to nonresponse
+---> 
+*Is this result similar to what you would obtain in a complete case analysis?*
+
+## How was imputation done?
+
+Many different methods can be used to impute missing data. For these data, we can see what was used (the default in this case):
+```{r,method}
+imp$method
+```
+
+Predictive mean matching (PMM, Rubin 1986) is a semiparametric method often used in multiple imputation. Advantages include matching the distribution of the original observed variable, as imputed values are taken from the real data. 
+
+
+## Predictive mean matching
+Suppose $x$ is subject to missing values while $z$ is completely observed.
+
+Basic approach:
+
+1. Using complete cases, estimate regression of $x$ on $z$, obtaining $\widehat{\beta}$
+2. Draw a new $\beta^*$ from the posterior predictive distribution of $\widehat{\beta}$ (e.g., MVN)
+3. Using $\beta^*$, generate predicted values of $x$ for all cases
+4. For each case with a missing $x$, identify set of donors with observed $x$ who have predicted $x$ values close to that of the case with missing data
+5. From among these cases, randomly select one and assign its observed value of $x$ as the imputed value
+6. Repeat for all observations and imputation data sets
+
+
+
+## Increasing number of imputations
+
+Increase the number of imputations to $m=50$ to see whether we get similar results
+```{r,moreimpute, cache=TRUE}
+imp50 <- mice(nhanes, m=50, printFlag=FALSE, maxit = 40, seed=2525)
+fit.mi50 <- with(data=imp50, expr = lm(chl ~ age + bmi))
+combFit <- pool(fit.mi50)
+round(summary(combFit),2)
+```
+Results are similar. One rule of thumb is that the \# of imputations should roughly equal the \% of missing data.
+
+## Examine imputations created by MICE
+```{r,pulloffimputationsbmi}
+# Extract the imputations for bmi
+imp$imp$bmi
+```
+
+
+## Examine imputations created by MICE
+```{r,pulloffdataset2}
+
+# Extract the second complete dataset
+imp_2 <- complete(imp, 2)
+head(imp_2)
+```
+
+## Checking imputations visually
+```{r,checkimp,out.width='70%'}
+# scatterplot (of chl and bmi) for each imputed dataset
+xyplot(imp, bmi ~ chl | .imp, pch = 20, cex = 1.4)
+```
+
+We expect the red points (imputed data) have almost the same shape as blue points. Blue points are constant across imputed datasets, but red points differ from each other, which represents our uncertainty about the true values of missing data.
+
+## Checking imputations visually
+```{r,vizimp}
+# To detect interesting differences in distribution between observed and imputed data
+densityplot(imp)
+```
+
+## What if we only know BMI as a binary indicator?
+```{r,binarybmi, cache=TRUE}
+# Create an indicator variable of BMI, coded as 1 if BMI >= 25, 0 if BMI<25, 
+# NA if BMI is missing
+nhanes$overwt <- ifelse(is.na(nhanes$bmi),NA,ifelse(nhanes$bmi<25,0,1))
+nhanes_new <- nhanes[,-which(names(nhanes) %in% "bmi")]
+nhanes_new$overwt <- as.factor(nhanes_new$overwt)
+
+# MICE
+imp_new <- mice(nhanes_new, m=20, printFlag=FALSE, maxit = 40, seed=2525) 
+fit.mi_new <- with(data=imp_new, expr = lm(chl ~ age + overwt))
+combFit_new <- pool(fit.mi_new)
+round(summary(combFit_new),2)
+```
+
+## How mice() actually imputes values
+```{r,seemodels,warning=FALSE}
+# See the univariate imputation model for each incomplete variable that mice() used
+# for your data as default
+imp_new$meth
+
+# Possible imputation models provided by mice()
+methods(mice)
+```
+
+## Logistic regression method
+The logistic regression method is used as a default when $x$ is binary. Suppose again $z$ is completely observed. Then the method is as follows.
+
+Basic approach:
+
+1. Using complete cases, estimate logistic regression for response $x$ with predictor $z$, obtaining $\widehat{\beta}$
+2. Draw a new $\beta^*$ from the posterior predictive distribution of $\widehat{\beta}$ 
+3. Using $\beta^*$, generate predicted probability of $p=Pr(x=1)$ for subjects with missing $x$
+4. Randomly sample a $U(0,1)$ random variable $u$ and set $x=1$ if $u<p$ and $x=0$ otherwise
+6. Repeat for all observations and imputation data sets
+
+## Change the default imputation methods
+```{r,changedefault, cache=TRUE}
+# Since hypertension is binary, we want to change the default imputation method
+meth=imp_new$meth
+meth = c("", "logreg", "pmm","logreg")
+nhanes_new$hyp <- as.factor(nhanes_new$hyp)
+imp_new2 <- mice(nhanes_new, m=20, printFlag=FALSE, maxit = 40, seed=2525,
+                 method = meth) 
+imp_new2$method
+
+# Visiting sequence
+imp_new2$vis
+```
+
+We could have declared hypertension as a factor at the beginning (as we did for age at the beginning), and the default would have been to use logistic regression for imputation for that variable as well.
+
+
+
+## Look at imputation model
+
+```{r,predictors}
+# Predictor matrix: Which variables does mice() use as predictors 
+# for imputation of each incomplete variable?
+imp_new2$pred
+
+# We can specify relevant predictors as follows:
+# Suppose hypertension should not predict overweight and cholesterol
+pred=imp_new2$pred;
+pred[, "hyp"] = 0
+pred
+```
+
