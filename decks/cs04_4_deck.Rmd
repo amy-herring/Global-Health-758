@@ -1,0 +1,176 @@
+---
+title: Missing Longitudinal Data
+output: 
+  revealjs::revealjs_presentation:
+    theme: night
+    highlight: espresso
+    center: true
+    transition: none
+    css: styles.css
+    fig_caption: true
+    reveal_options:
+      progress: true
+      slideNumber: true
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(mice)
+library(VIM)
+library(lattice)
+```
+  
+## SHARE-Child Pakistan
+
+First, let's read our data into R again.
+
+```{r sharechildread}
+library(readstata13)
+dep=read.dta13("~/Documents/TEACHING/SHARE-Child data/SC_anonymized_forAmy_20180314.dta")
+#PHQ>9 a sign of potential moderate to severe depression
+dep$depressed=dep$phqTotal>9; dep$y=as.numeric(dep$depressed)
+dep$edu=cut(dep$momEduc,breaks=c(-.001,12,16))
+dep$age=cut(dep$momAge,breaks=c(15,30,41))
+dep$pid=dep$anon_id
+depfinal=dep[,c(3,8,9:11)] #pick off ID, time, outcome, edu, and age
+```
+
+## Missing data in SHARE-Child
+
+In SHARE-Child Pakistan, we have missing data on the depression outcome measured longitudinally. Our data are structured so that we have one line per person for each measurement occasion.
+
+```{r showformat}
+head(depfinal)
+```
+
+The variable `anon_id` indicates the observations from each participant.
+
+## Missing data in SHARE-Child
+
+To use MICE, we want to have the data structured so that we have only one line per person. Because education and age do not change within subject in these data, it is fairly straightforward to reshape the data into one line per person format.
+
+```{r reshape}
+depwide=reshape(depfinal,timevar="timepoint",idvar=c("pid","edu","age"),
+                direction="wide")
+head(depwide) #check vs previous output this happened correctly
+```
+
+## Examine patterns of missingness
+
+```{r msngpattern, out.width="80%"}
+md.pattern(depwide)
+```
+
+Here we see that there are 126 people with no missing data, 19 who are missing the 3 month follow-up only, 7 who are only missing the 6 month follow-up, and 22 who are missing both post-baseline measurements.
+
+## Examine missing data mechanism
+
+```{r msngpat}
+#depwide =1 if only missing y.1, 2 if only missing y.2, 3 if missing both
+depwide$pattern=as.numeric(is.na(depwide$y.1))+2*as.numeric(is.na(depwide$y.2))
+```
+
+## Predictors of missing data pattern
+
+To look at predictors of the patterns of missing data, we can fit a multinomial logistic regression model to examine predictors of missingness of each pattern (relative to having complete data).
+
+```{r genlogit}
+library(nnet)
+genl=multinom(pattern~age+edu+y.0,data=depwide)
+
+```
+
+## Predictors of missing data pattern
+
+```{r genlogit2}
+summary(genl)
+summary(genl)$coefficients/summary(genl)$standard.errors
+```
+
+## Predictors of missing data pattern
+
+That multinomial logistic regression model does not reveal strong predictors of missingness. While it is not possible to rule out MNAR, we do not see strong evidence of any observed variables (including baseline depression) predicting missingness.
+
+## Imputation of the missing outcomes
+
+```{r,mice, cache=TRUE}
+depimp <- mice(depwide, m=20, printFlag=FALSE, maxit = 40, seed=2525) 
+# The output depimp contains m=20 completed datasets 
+
+```
+
+## Looking at imputed values
+
+```{r micelook}
+#look at first few lines of imputed data and original data
+cbind(head(complete(depimp,1)),head(depwide))
+```
+
+You can see the imputed values in the first imputation for person 3, who was missing both follow-up times.
+
+## Looking at imputed values
+
+```{r micelook2}
+# note the .imp value is the number of the imputation
+head(complete(depimp,action='long'))
+tail(complete(depimp,action='long'))
+```
+
+## Reshaping data
+
+In order to fit a GEE to these data, we need to transform the data structure back into "long" format from "wide" format. We can do this reconfiguration as follows.
+
+```{r reconfigure}
+depimp.data=as.list(1:20)
+for (i in 1:20) {
+  depimp.data[[i]]=complete(depimp,action=i)
+}
+# transpose data and add time variable back
+depimp.data2 <- lapply(depimp.data,reshape,varying=4:6,v.names="dep",idvar="pid",timevar="followup",times=c(0,1,2),direction="long")
+depimp.data2 <- lapply(depimp.data2,FUN=function(u){ u[order(u$pid),]})
+
+```
+
+## Fit GEE to each imputed dataset
+
+```{r fitgee}
+library(geepack)
+depimp.gee=lapply(depimp.data2,
+                  FUN=function(u){geeglm(dep~as.factor(followup)+edu,
+                                         id=as.factor(pid),  family=binomial(),
+                                      corstr="exchangeable",waves=followup,data=u)})
+
+```
+
+## Look at each analysis
+```{r lookgee}
+depimp.gee
+```
+
+## Grab estimates and SE's to use Rubin's rules
+
+```{r getestimates}
+depimp.parms <- lapply(depimp.gee,coefficients)
+depimp.ses <- lapply(depimp.gee,FUN=function(u){
+    sqrt(diag(u$geese$vbeta))
+})
+```
+
+## Pooling using Rubin's rules
+
+For this GEE, we cannot use MICE for the pooling, but we can use the mi.inference function from the `norm` package.
+
+```{r normpkg}
+library(norm)
+mi.parms = mi.inference(depimp.parms,depimp.ses,confidence=0.95)
+mi.results = cbind(mi.parms$est,mi.parms$std.err,mi.parms$lower,mi.parms$upper, mi.parms$df)
+colnames(mi.results) <- c("Est","StdErr","Lower","Upper","DF")
+```
+
+## Interpretation
+
+You practice! Interpret the results from this GEE using MI. Do our answers mirror those in the complete case analysis?
+
+```{r interp}
+mi.results
+```
