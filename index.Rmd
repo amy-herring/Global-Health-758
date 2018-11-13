@@ -65,8 +65,9 @@ Note: this schedule is approximate and is likely to be modified as the course pr
 | November 2    | CS3 Visualization presentations and CS4: Longitudinal Data | CS3 Interim Report (Class Presentation) |
 | November 7    | CS4: Missing Data Basics |  |
 | November 9    | Individual Case Studies | Individual Case Study Presentations |
-| November 14   | Individual Case Studies |Individual Case Study Presentations and CS3 Final Report  |
+| November 14   | Individual Case Studies |Individual Case Study Presentations   |
 | November 16   | Individual Case Studies | Individual Case Study Presentations |
+| November 19 | CS3 Final Report | |
 | November 28   | CS4: Lab: CS4 Reports | Individual Case Study Final Report  | 
 | November 30   | CS4: Lab: CS4 Reports | CS4 Final Report (by 5pm)|
 | TBA (Dec 7? Another day?) | Optional End of Term Celebration | | 
