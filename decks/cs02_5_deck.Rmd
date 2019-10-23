@@ -1,0 +1,124 @@
+---
+title: Small Sample Methods
+output: 
+  revealjs::revealjs_presentation:
+    theme: night
+    highlight: espresso
+    center: true
+    transition: none
+    css: styles.css
+    fig_caption: true
+    reveal_options:
+      progress: true
+      slideNumber: true
+      
+  
+---
+  
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE,fig.width=6, fig.height=5)
+```
+
+## Motivating example: *Streptococcus pneumoniae* 
+
+Infections due to \emph{Streptococcus pneumoniae} remain a substantial source of morbidity and mortality in both developing and developed countries, despite a century of research and the development of therapeutic interventions such as multiple classes of antibiotics and vaccination. The World Health Organization estimates that in developing countries 814,000 children under the age of five die annually from invasive pneumococcal disease (IPD), with an estimated 1.6 million deaths affecting all ages globally.
+
+
+Several recent studies have identified associations between pneumococcal serotypes (species variations) and patient outcomes from IPD.  We consider data from a Scottish study of pneumococcal serotypes and mortality.
+
+## Contingency tables
+
+A *contingency table* is a display format for showing the relationship between two categorical variables. Below is a contingency table for a subset of serotypes from the Scottish study. 
+
+|Serogroup | Died | Survived | Total|
+|---------|---------:|---------:|----------:|
+*31* | 10 | 24 | 34 |
+*10* | 7 | 37 | 44 |
+*15* | 12 | 60 | 72 |
+*20* | 9 | 97 | 106 |
+*Total* | 38 | 218 | 256 | 
+
+
+## Contingency tables
+
+Typical questions of interest:
+
+- Is there an association between the row variable (indexed by $r$) and the column variable (indexed by $c$)?
+- How strong is any association?
+
+## Pneumococcal serotypes and IPD mortality
+
+First, we can generate the proportion of infected individuals who died for each serotype.
+
+```{r genprop}
+pneu=matrix(c(37,7,60,12,97,9,24,10),
+   byrow=TRUE,nrow=4)
+
+dimnames(pneu)=list(Serogroup=
+    c("10","15","20","31"),
+    Survived=c("Yes","No"))
+
+prop.table(pneu,margin=1)
+
+```
+
+We would like to test $H_0:$ pneumococcal serotype is unrelated to mortality against the alternative $H_A:$  pneumococcal serotype is related to mortality
+
+## Fisher's exact test
+
+Fisher's exact test is a great first choice for testing a relationship between two variables in a contingency table.  While it has been around for almost 100 years, it was originally used only for very small samples due to the computational burden involved (this concern has been largely alleviated by modern computing).
+
+![](figures/fisher.png){width=40%}
+
+## A lady tasting tea
+
+[See how Fisher's exact test was invented](https://io9.gizmodo.com/how-a-tea-party-turned-into-a-scientific-legend-1706697488)
+
+
+Ironically, Dr. Bristol-Roach, the lady, is better remembered for her fussiness about tea than for the algae that bears her name!
+
+## Fisher's exact test
+
+Fisher's exact test is fairly intuitive.  The way it works is that we assume the column and row totals are fixed (so for our pneumococcus example, we assume we have 38 deaths and 218 survivors and that we have 34 in serogroup 31, 44 in serogroup 10, 72 in serogroup 15, and 106 in serogroup 20).  Then, we construct all possible contingency tables with the same margins (row and column totals), and then sum up the probabilities of all tables as extreme or more extreme than our own table to get the p-value (recall the p-value is the probability of the observed data, or more extreme data, occurring under the null hypothesis). Before modern computing, this was no fun for data that were not very small!
+
+## Advantages of Fisher's exact test
+
+Fisher's exact test is often used as an alternative to the chi-squared test if the sample size is small, or if there are 0's in some table cells, due to its better statistical properties in small sample settings.  This test does not require any assumptions of large sample sizes, as required by the chi-squared test.
+
+## Fisher's exact test for *Pneumococcus* data
+
+```{r fisher}
+fisher.test(pneu)
+
+```
+
+What do we conclude?
+
+## Infant mortality data: 
+
+Check out the [2015 NC Infant Mortality data](https://schs.dph.ncdhhs.gov/data/vital/ims/2015/2015rpt.html). We will consider infant mortality in Durham and Catawba counties in 2015. 
+
+## Durham and Catawba counties
+
+First, calculate infant mortality rates by race/ethnicity.
+
+| County | Race/Ethnicity  | Births | Deaths in first year | Infant mortality rate/1000 births |
+|:--------|:----------|--------:|--------:|---------|
+Durham | NH White | 1640 | 6 | |
+Durham | NH AA | 1402 | 15 | |
+Durham | NH AI | 12 | 0 | |
+Durham | NH Other | 267 | 0 | |
+Durham | Hispanic | 910 | 4 | |
+Catawba | NH White |  1143 |  10  | |
+Catawba | NH AA | 201 | 6 |  |
+Catawba | NH AI | 4 | 0 | |
+Catawba | NH Other | 134 | 3 |  |
+Catawba | Hispanic | 272 | 0 |  |
+
+How confident are you in reporting these rates?
+
+## Trends across counties
+
+Now, test whether the infant mortality rate for African-American births is the same in the two counties.  What do you conclude?  What about rates in other race/ethnicity groups?
+
+Do these test results affect your confidence levels in your reported rates?
